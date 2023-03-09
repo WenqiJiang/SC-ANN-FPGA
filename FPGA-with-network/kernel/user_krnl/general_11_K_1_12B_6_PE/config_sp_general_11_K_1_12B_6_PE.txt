@@ -1,0 +1,71 @@
+platform=xilinx_u280_xdma_201920_3
+profile_kernel=data:all:all:all
+kernel_frequency=140
+debug=1
+
+[connectivity] 
+
+slr=cmac_krnl_1:SLR2
+
+sp=general_11_K_1_12B_6_PE_1.HBM_in0:HBM[0]
+sp=general_11_K_1_12B_6_PE_1.HBM_in1:HBM[1]
+sp=general_11_K_1_12B_6_PE_1.HBM_in2:HBM[2]
+sp=general_11_K_1_12B_6_PE_1.HBM_in3:HBM[4]
+sp=general_11_K_1_12B_6_PE_1.HBM_in4:HBM[5]
+sp=general_11_K_1_12B_6_PE_1.HBM_in5:HBM[6]
+sp=general_11_K_1_12B_6_PE_1.HBM_in6:HBM[9]
+sp=general_11_K_1_12B_6_PE_1.HBM_in7:HBM[10]
+sp=general_11_K_1_12B_6_PE_1.HBM_in8:HBM[11]
+sp=general_11_K_1_12B_6_PE_1.HBM_in9:HBM[14]
+sp=general_11_K_1_12B_6_PE_1.HBM_in10:HBM[15]
+sp=general_11_K_1_12B_6_PE_1.HBM_in11:HBM[16]
+
+sp=general_11_K_1_12B_6_PE_1.HBM_centroid_vectors_stage2_0:HBM[18]
+sp=general_11_K_1_12B_6_PE_1.HBM_centroid_vectors_stage2_1:HBM[20]
+sp=general_11_K_1_12B_6_PE_1.HBM_centroid_vectors_stage2_2:HBM[22]
+
+sp=general_11_K_1_12B_6_PE_1.HBM_meta_info:HBM[25]
+sp=general_11_K_1_12B_6_PE_1.HBM_vector_quantizer:HBM[26]
+
+sp=network_krnl_1.m00_axi:HBM[28]
+sp=network_krnl_1.m01_axi:HBM[29]
+sc=network_krnl_1.m_axis_udp_rx:general_11_K_1_12B_6_PE_1.s_axis_udp_rx
+sc=network_krnl_1.m_axis_udp_rx_meta:general_11_K_1_12B_6_PE_1.s_axis_udp_rx_meta
+sc=network_krnl_1.m_axis_tcp_port_status:general_11_K_1_12B_6_PE_1.s_axis_tcp_port_status
+sc=network_krnl_1.m_axis_tcp_open_status:general_11_K_1_12B_6_PE_1.s_axis_tcp_open_status
+sc=network_krnl_1.m_axis_tcp_notification:general_11_K_1_12B_6_PE_1.s_axis_tcp_notification
+sc=network_krnl_1.m_axis_tcp_rx_meta:general_11_K_1_12B_6_PE_1.s_axis_tcp_rx_meta
+sc=network_krnl_1.m_axis_tcp_rx_data:general_11_K_1_12B_6_PE_1.s_axis_tcp_rx_data
+sc=network_krnl_1.m_axis_tcp_tx_status:general_11_K_1_12B_6_PE_1.s_axis_tcp_tx_status
+
+sc=general_11_K_1_12B_6_PE_1.m_axis_udp_tx:network_krnl_1.s_axis_udp_tx
+sc=general_11_K_1_12B_6_PE_1.m_axis_udp_tx_meta:network_krnl_1.s_axis_udp_tx_meta
+sc=general_11_K_1_12B_6_PE_1.m_axis_tcp_listen_port:network_krnl_1.s_axis_tcp_listen_port
+sc=general_11_K_1_12B_6_PE_1.m_axis_tcp_open_connection:network_krnl_1.s_axis_tcp_open_connection
+sc=general_11_K_1_12B_6_PE_1.m_axis_tcp_close_connection:network_krnl_1.s_axis_tcp_close_connection
+sc=general_11_K_1_12B_6_PE_1.m_axis_tcp_read_pkg:network_krnl_1.s_axis_tcp_read_pkg
+sc=general_11_K_1_12B_6_PE_1.m_axis_tcp_tx_meta:network_krnl_1.s_axis_tcp_tx_meta
+sc=general_11_K_1_12B_6_PE_1.m_axis_tcp_tx_data:network_krnl_1.s_axis_tcp_tx_data
+
+sc=cmac_krnl_1.axis_net_rx:network_krnl_1.axis_net_rx
+sc=network_krnl_1.axis_net_tx:cmac_krnl_1.axis_net_tx
+
+
+[vivado] 
+#param=compiler.userPreSysLinkTcl=$(PWD)/tcl/plram.tcl 
+param=route.enableGlobalHoldIter=true
+param=project.writeIntermediateCheckpoints=true
+prop=run.impl_1.STEPS.PLACE_DESIGN.ARGS.DIRECTIVE=Explore
+# prop=run.impl_1.STEPS.PLACE_DESIGN.ARGS.DIRECTIVE=SSI_SpreadLogic_high
+# prop=run.impl_1.{STEPS.PLACE_DESIGN.ARGS.MORE OPTIONS}={-post_place_opt}
+prop=run.impl_1.{STEPS.PHYS_OPT_DESIGN.IS_ENABLED}=true 
+# prop=run.impl_1.STEPS.PHYS_OPT_DESIGN.ARGS.DIRECTIVE=ExploreWithHoldFix
+# prop=run.impl_1.{STEPS.PHYS_OPT_DESIGN.ARGS.MORE OPTIONS}={-fanout_opt -critical_cell_opt -rewire -slr_crossing_opt -tns_cleanup -hold_fix -sll_reg_hold_fix -retime}
+prop=run.impl_1.{STEPS.PHYS_OPT_DESIGN.ARGS.MORE OPTIONS}={-placement_opt -critical_cell_opt}
+#prop=run.impl_1.{STEPS.PHYS_OPT_DESIGN.ARGS.MORE OPTIONS}={-hold_fix -slr_crossing_opt}
+prop=run.impl_1.STEPS.ROUTE_DESIGN.ARGS.DIRECTIVE=Explore
+# prop=run.impl_1.STEPS.ROUTE_DESIGN.ARGS.DIRECTIVE=AlternateCLBRouting 
+#prop=run.impl_1.{STEPS.PHYS_OPT_DESIGN.ARGS.MORE OPTIONS}={-hold_fix}
+prop=run.impl_1.{STEPS.POST_ROUTE_PHYS_OPT_DESIGN.IS_ENABLED}=true 
+prop=run.impl_1.{STEPS.POST_ROUTE_PHYS_OPT_DESIGN.ARGS.MORE OPTIONS}={-critical_cell_opt -rewire -hold_fix -sll_reg_hold_fix -retime}
+#prop=run.impl_1.{STEPS.POST_ROUTE_PHYS_OPT_DESIGN.ARGS.MORE OPTIONS}={-critical_cell_opt -rewire -slr_crossing_opt -tns_cleanup -hold_fix -sll_reg_hold_fix -retime}
