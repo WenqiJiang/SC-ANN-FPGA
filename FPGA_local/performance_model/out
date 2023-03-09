@@ -1,0 +1,102 @@
+FIND SOLUTION
+
+
+======== Result =========
+
+QPS 800.4482510205714
+stage_option_list
+Stage 1:
+
+        HBM_bank: 0
+        BRAM_18K: 37
+        URAM: 0
+        FF: 2659
+        LUT: 2152
+        DSP48E: 20
+        
+QPS: 32014.635261833984
+Cycles per query: 4373.0
+OPQ_ENABLE: True
+OPQ_UNROLL_FACTOR: 4
+Stage 2:
+
+        HBM_bank: 3
+        BRAM_18K: 1.0
+        URAM: 0
+        FF: 69149
+        LUT: 53850
+        DSP48E: 348
+        
+QPS: 800.4482510205714
+Cycles per query: 174902
+STAGE2_ON_CHIP: False
+STAGE2_OFF_CHIP_START_CHANNEL:None
+PE_NUM_CENTER_DIST_COMP: 6
+Stage 3:
+
+        HBM_bank: 0
+        BRAM_18K: 1.0
+        URAM: 0
+        FF: 5977.099999999999
+        LUT: 6518.700000000001
+        DSP48E: 0
+        
+QPS: 1067.7893709195191
+Cycles per query: 131112
+STAGE_3_PRIORITY_QUEUE_LEVEL: 1
+STAGE_3_PRIORITY_QUEUE_L1_NUM: 1
+Stage 4:
+
+        HBM_bank: 1
+        BRAM_18K: 275.0
+        URAM: 8
+        FF: 32341
+        LUT: 20365
+        DSP48E: 54
+        
+QPS: 1093.3399975009372
+Cycles per query: 128048
+PE_NUM_TABLE_CONSTRUCTION: 1
+Stage 5:
+
+        HBM_bank: 1.0
+        BRAM_18K: 21.0
+        URAM: 0.0
+        FF: 5881.0
+        LUT: 5471.333333333333
+        DSP48E: 30.0
+        
+QPS: 2262.0778801098722
+Cycles per query: 61890
+HBM_CHANNEL_NUM: 1
+STAGE5_COMP_PE_NUM: 1
+Stage 6:
+
+        HBM_bank: 0
+        BRAM_18K: 6.0
+        URAM: 0
+        FF: 6452.099999999999
+        LUT: 6788.700000000001
+        DSP48E: 0
+        
+QPS: 2677.8882938026013
+Cycles per query: 52280
+
+SORT_GROUP_ENABLE: False
+SORT_GROUP_NUM: None
+STAGE_6_PRIORITY_QUEUE_LEVEL: 2
+STAGE_6_PRIORITY_QUEUE_L2_NUM: None
+STAGE_6_STREAM_PER_L2_QUEUE_LARGER: None
+STAGE_6_STREAM_PER_L2_QUEUE_SMALLER: None
+        
+Total resource consumption:
+
+        HBM_bank: 5.0
+        BRAM_18K: 1425.0
+        URAM: 8.0
+        FF: 503237.2
+        LUT: 344289.73333333334
+        DSP48E: 468.0
+        
+Utilization rate:
+{'BRAM_18K': '26.50669642857143%', 'DSP48E': '3.80859375%', 'FF': '14.561261574074075%', 'LUT': '19.92417438271605%', 'URAM': '0.625%'}
