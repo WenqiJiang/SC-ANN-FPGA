@@ -72,7 +72,7 @@ TCP/IP stack options:
 The following example command will synthesis and implement the design with selected `user` kernel. The generated XCLBIN resides in folder build_dir.hw.xilinx_u280_xdma_201920_3. The generated host executable resides in folder host.
 
     cd ../
-    make all TARGET=hw DEVICE=/opt/xilinx/platforms/xilinx_u55c_gen3x16_xdma_3_202210_1/xilinx_u55c_gen3x16_xdma_3_202210_1.xpfm USER_KRNL=hls_send_krnl USER_KRNL_MODE=hls NETH=4
+    make all TARGET=hw DEVICE=/opt/xilinx/platforms/xilinx_u55c_gen3x16_xdma_3_202210_1/xilinx_u55c_gen3x16_xdma_3_202210_1.xpfm USER_KRNL=hls_send_krnl USER_KRNL_MODE=hls NETH=4 > out 2>&1
 
 * `DEVICE` Alveo development target platform
 * `USER_KRNL` Name of the user kernel

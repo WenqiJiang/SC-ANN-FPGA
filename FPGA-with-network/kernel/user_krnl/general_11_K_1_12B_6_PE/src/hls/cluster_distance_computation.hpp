@@ -967,7 +967,7 @@ void compute_cell_distance_wrapper(
     // head
     compute_cell_distance_head_PE<query_num>(
         0,
-        centroids_per_partition, 
+        centroids_per_partition_even, 
         total_centriods,
         s_HBM_centroid_vectors[0],
         s_cell_ID[0],
@@ -978,7 +978,7 @@ void compute_cell_distance_wrapper(
     // middle
         compute_cell_distance_middle_PE<QUERY_NUM>(
             1,
-            centroids_per_partition, 
+            centroids_per_partition_even, 
             total_centriods,
             s_HBM_centroid_vectors[1],
             s_cell_ID[1],
@@ -989,7 +989,7 @@ void compute_cell_distance_wrapper(
 
         compute_cell_distance_middle_PE<QUERY_NUM>(
             2,
-            centroids_per_partition, 
+            centroids_per_partition_even, 
             total_centriods,
             s_HBM_centroid_vectors[2],
             s_cell_ID[2],
@@ -1000,7 +1000,7 @@ void compute_cell_distance_wrapper(
 
         compute_cell_distance_middle_PE<QUERY_NUM>(
             3,
-            centroids_per_partition, 
+            centroids_per_partition_even, 
             total_centriods,
             s_HBM_centroid_vectors[3],
             s_cell_ID[3],
@@ -1011,7 +1011,7 @@ void compute_cell_distance_wrapper(
 
         compute_cell_distance_middle_PE<QUERY_NUM>(
             4,
-            centroids_per_partition, 
+            centroids_per_partition_even, 
             total_centriods,
             s_HBM_centroid_vectors[4],
             s_cell_ID[4],
@@ -1023,7 +1023,7 @@ void compute_cell_distance_wrapper(
         // tail
         compute_cell_distance_tail_PE<QUERY_NUM>(
             PE_NUM_CENTER_DIST_COMP_EVEN,
-            centroids_per_partition, 
+            centroids_per_partition_even, 
             centroids_per_partition_last_PE, 
             total_centriods,
             s_HBM_centroid_vectors[5],

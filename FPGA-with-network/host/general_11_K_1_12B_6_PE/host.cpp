@@ -32,6 +32,7 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <cmath>
 
 #include "host.hpp"
 
@@ -147,14 +148,14 @@ int main(int argc, char **argv) {
         "ground truth directory" << gnd_dir << std::endl;
 
     // inferred parameters giving input parameters
-    int centroids_per_partition_even = ceil(float(nlist) / float(PE_NUM_CENTER_DIST_COMP));
+    int centroids_per_partition_even = std::ceil(float(nlist) / float(PE_NUM_CENTER_DIST_COMP));
     int centroids_per_partition_last_PE = nlist - centroids_per_partition_even * (PE_NUM_CENTER_DIST_COMP - 1);
 
     int nprobe_stage4 = nprobe;
     int nprobe_per_table_construction_pe_larger = -1;
     int nprobe_per_table_construction_pe_smaller = -1;
     while (nprobe_per_table_construction_pe_smaller < 1) {
-        nprobe_per_table_construction_pe_larger = ceil(float(nprobe_stage4) / float(PE_NUM_TABLE_CONSTRUCTION));
+        nprobe_per_table_construction_pe_larger = std::ceil(float(nprobe_stage4) / float(PE_NUM_TABLE_CONSTRUCTION));
         nprobe_per_table_construction_pe_smaller = 
             nprobe_stage4 - PE_NUM_TABLE_CONSTRUCTION_LARGER * nprobe_per_table_construction_pe_larger;
         if (nprobe_per_table_construction_pe_smaller < 1) {
@@ -392,22 +393,22 @@ int main(int argc, char **argv) {
     HBM_embedding11_fstream.seekg(0, HBM_embedding11_fstream.beg);
     
 
-    size_t HBM_embedding0_len = (int) (HBM_embedding0_size / sizeof(ap_uint512_t));
-    size_t HBM_embedding1_len = (int) (HBM_embedding1_size / sizeof(ap_uint512_t));
-    size_t HBM_embedding2_len = (int) (HBM_embedding2_size / sizeof(ap_uint512_t));
-    size_t HBM_embedding3_len = (int) (HBM_embedding3_size / sizeof(ap_uint512_t));
-    size_t HBM_embedding4_len = (int) (HBM_embedding4_size / sizeof(ap_uint512_t));
-    size_t HBM_embedding5_len = (int) (HBM_embedding5_size / sizeof(ap_uint512_t));
-    size_t HBM_embedding6_len = (int) (HBM_embedding6_size / sizeof(ap_uint512_t));
-    size_t HBM_embedding7_len = (int) (HBM_embedding7_size / sizeof(ap_uint512_t));
-    size_t HBM_embedding8_len = (int) (HBM_embedding8_size / sizeof(ap_uint512_t));
-    size_t HBM_embedding9_len = (int) (HBM_embedding9_size / sizeof(ap_uint512_t));
-    size_t HBM_embedding10_len = (int) (HBM_embedding10_size / sizeof(ap_uint512_t));
-    size_t HBM_embedding11_len = (int) (HBM_embedding11_size / sizeof(ap_uint512_t));
+    size_t HBM_embedding0_len = (int) (HBM_embedding0_size / sizeof(int));
+    size_t HBM_embedding1_len = (int) (HBM_embedding1_size / sizeof(int));
+    size_t HBM_embedding2_len = (int) (HBM_embedding2_size / sizeof(int));
+    size_t HBM_embedding3_len = (int) (HBM_embedding3_size / sizeof(int));
+    size_t HBM_embedding4_len = (int) (HBM_embedding4_size / sizeof(int));
+    size_t HBM_embedding5_len = (int) (HBM_embedding5_size / sizeof(int));
+    size_t HBM_embedding6_len = (int) (HBM_embedding6_size / sizeof(int));
+    size_t HBM_embedding7_len = (int) (HBM_embedding7_size / sizeof(int));
+    size_t HBM_embedding8_len = (int) (HBM_embedding8_size / sizeof(int));
+    size_t HBM_embedding9_len = (int) (HBM_embedding9_size / sizeof(int));
+    size_t HBM_embedding10_len = (int) (HBM_embedding10_size / sizeof(int));
+    size_t HBM_embedding11_len = (int) (HBM_embedding11_size / sizeof(int));
 
-    size_t HBM_centroid_vectors0_len = 2 * centroids_per_partition_even * D * sizeof(float) / sizeof(ap_uint512_t);
-    size_t HBM_centroid_vectors1_len = 2 * centroids_per_partition_even * D * sizeof(float) / sizeof(ap_uint512_t);
-    size_t HBM_centroid_vectors2_len = (centroids_per_partition_even + centroids_per_partition_last_PE) * D * sizeof(float) / sizeof(ap_uint512_t);
+    size_t HBM_centroid_vectors0_len = 2 * centroids_per_partition_even * D * sizeof(float) / sizeof(int);
+    size_t HBM_centroid_vectors1_len = 2 * centroids_per_partition_even * D * sizeof(float) / sizeof(int);
+    size_t HBM_centroid_vectors2_len = (centroids_per_partition_even + centroids_per_partition_last_PE) * D * sizeof(float) / sizeof(int);
 
 
     int query_num = 10000;
@@ -436,9 +437,9 @@ int main(int argc, char **argv) {
     // recall counts the very first nearest neighbor only
     size_t gt_vec_ID_len = 10000;
 
-    size_t HBM_centroid_vectors0_size =  HBM_centroid_vectors0_len * sizeof(ap_uint512_t);
-    size_t HBM_centroid_vectors1_size =  HBM_centroid_vectors1_len * sizeof(ap_uint512_t);
-    size_t HBM_centroid_vectors2_size =  HBM_centroid_vectors2_len * sizeof(ap_uint512_t);
+    size_t HBM_centroid_vectors0_size =  HBM_centroid_vectors0_len * sizeof(int);
+    size_t HBM_centroid_vectors1_size =  HBM_centroid_vectors1_len * sizeof(int);
+    size_t HBM_centroid_vectors2_size =  HBM_centroid_vectors2_len * sizeof(int);
 
     size_t HBM_info_start_addr_and_scanned_entries_every_cell_and_last_element_valid_size = 
         HBM_info_start_addr_and_scanned_entries_every_cell_and_last_element_valid_len * sizeof(int);
@@ -456,22 +457,22 @@ int main(int argc, char **argv) {
 
     // allocate aligned 2D vectors
 //////////////////////////////   TEMPLATE START  //////////////////////////////
-    std::vector<ap_uint512_t, aligned_allocator<ap_uint512_t>> HBM_embedding0(HBM_embedding0_len, 0);
-    std::vector<ap_uint512_t, aligned_allocator<ap_uint512_t>> HBM_embedding1(HBM_embedding1_len, 0);
-    std::vector<ap_uint512_t, aligned_allocator<ap_uint512_t>> HBM_embedding2(HBM_embedding2_len, 0);
-    std::vector<ap_uint512_t, aligned_allocator<ap_uint512_t>> HBM_embedding3(HBM_embedding3_len, 0);
-    std::vector<ap_uint512_t, aligned_allocator<ap_uint512_t>> HBM_embedding4(HBM_embedding4_len, 0);
-    std::vector<ap_uint512_t, aligned_allocator<ap_uint512_t>> HBM_embedding5(HBM_embedding5_len, 0);
-    std::vector<ap_uint512_t, aligned_allocator<ap_uint512_t>> HBM_embedding6(HBM_embedding6_len, 0);
-    std::vector<ap_uint512_t, aligned_allocator<ap_uint512_t>> HBM_embedding7(HBM_embedding7_len, 0);
-    std::vector<ap_uint512_t, aligned_allocator<ap_uint512_t>> HBM_embedding8(HBM_embedding8_len, 0);
-    std::vector<ap_uint512_t, aligned_allocator<ap_uint512_t>> HBM_embedding9(HBM_embedding9_len, 0);
-    std::vector<ap_uint512_t, aligned_allocator<ap_uint512_t>> HBM_embedding10(HBM_embedding10_len, 0);
-    std::vector<ap_uint512_t, aligned_allocator<ap_uint512_t>> HBM_embedding11(HBM_embedding11_len, 0);
+    std::vector<int, aligned_allocator<int>> HBM_embedding0(HBM_embedding0_len, 0);
+    std::vector<int, aligned_allocator<int>> HBM_embedding1(HBM_embedding1_len, 0);
+    std::vector<int, aligned_allocator<int>> HBM_embedding2(HBM_embedding2_len, 0);
+    std::vector<int, aligned_allocator<int>> HBM_embedding3(HBM_embedding3_len, 0);
+    std::vector<int, aligned_allocator<int>> HBM_embedding4(HBM_embedding4_len, 0);
+    std::vector<int, aligned_allocator<int>> HBM_embedding5(HBM_embedding5_len, 0);
+    std::vector<int, aligned_allocator<int>> HBM_embedding6(HBM_embedding6_len, 0);
+    std::vector<int, aligned_allocator<int>> HBM_embedding7(HBM_embedding7_len, 0);
+    std::vector<int, aligned_allocator<int>> HBM_embedding8(HBM_embedding8_len, 0);
+    std::vector<int, aligned_allocator<int>> HBM_embedding9(HBM_embedding9_len, 0);
+    std::vector<int, aligned_allocator<int>> HBM_embedding10(HBM_embedding10_len, 0);
+    std::vector<int, aligned_allocator<int>> HBM_embedding11(HBM_embedding11_len, 0);
 
-    std::vector<ap_uint512_t, aligned_allocator<ap_uint512_t>> HBM_centroid_vectors0(HBM_centroid_vectors0_len, 0);
-    std::vector<ap_uint512_t, aligned_allocator<ap_uint512_t>> HBM_centroid_vectors1(HBM_centroid_vectors1_len, 0);
-    std::vector<ap_uint512_t, aligned_allocator<ap_uint512_t>> HBM_centroid_vectors2(HBM_centroid_vectors2_len, 0);
+    std::vector<int, aligned_allocator<int>> HBM_centroid_vectors0(HBM_centroid_vectors0_len, 0);
+    std::vector<int, aligned_allocator<int>> HBM_centroid_vectors1(HBM_centroid_vectors1_len, 0);
+    std::vector<int, aligned_allocator<int>> HBM_centroid_vectors2(HBM_centroid_vectors2_len, 0);
 
     std::vector<int, aligned_allocator<int>> HBM_info_start_addr_and_scanned_entries_every_cell_and_last_element_valid(
         HBM_info_start_addr_and_scanned_entries_every_cell_and_last_element_valid_len, 0);

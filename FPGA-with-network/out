@@ -1,0 +1,46 @@
+$DEVICE is [/opt/xilinx/platforms/xilinx_u55c_gen3x16_xdma_3_202210_1/xilinx_u55c_gen3x16_xdma_3_202210_1.xpfm]
+$POSTSYSLINKTCL is [/pub/scratch/wenqi/SC_ANN_submission/SC-ANN-FPGA/FPGA-with-network/scripts/post_sys_link.tcl]
+g++ -I.//common/includes/xcl2 -I/home/wejiang/opt/xilinx/xrt/include -I/tools/Xilinx//Vivado/2022.1/include -Wall -O0 -g -std=gnu++14 -DVITIS_PLATFORM=/opt/xilinx/platforms/xilinx_u55c_gen3x16_xdma_3_202210_1/xilinx_u55c_gen3x16_xdma_3_202210_1.xpfm -fmessage-length=0 .//common/includes/xcl2/xcl2.cpp host/general_11_K_1_12B_6_PE/host.cpp   -o 'host/host'  -L/home/wejiang/opt/xilinx/xrt/lib -lOpenCL -lpthread  -lrt -lstdc++
+In file included from host/general_11_K_1_12B_6_PE/host.hpp:25,
+                 from host/general_11_K_1_12B_6_PE/host.cpp:37:
+host/general_11_K_1_12B_6_PE/cl2.hpp:19:151: note: #pragma message: cl2.hpp has been renamed to opencl.hpp to make it clear that it supports all versions of OpenCL. Please include opencl.hpp directly.
+   19 | #pragma message("cl2.hpp has been renamed to opencl.hpp to make it clear that it supports all versions of OpenCL. Please include opencl.hpp directly.")
+      |                                                                                                                                                       ^
+host/general_11_K_1_12B_6_PE/host.cpp: In function ‘int main(int, char**)’:
+host/general_11_K_1_12B_6_PE/host.cpp:419:12: warning: unused variable ‘HBM_out_len’ [-Wunused-variable]
+  419 |     size_t HBM_out_len = TOPK * query_num;
+      |            ^~~~~~~~~~~
+host/general_11_K_1_12B_6_PE/host.cpp:452:12: warning: unused variable ‘gt_vec_ID_size’ [-Wunused-variable]
+  452 |     size_t gt_vec_ID_size = gt_vec_ID_len * sizeof(int);
+      |            ^~~~~~~~~~~~~~
+host/general_11_K_1_12B_6_PE/host.cpp:456:14: warning: unused variable ‘fileBufSize’ [-Wunused-variable]
+  456 |     unsigned fileBufSize;
+      |              ^~~~~~~~~~~
+mkdir -p ./_x.hw.xilinx_u55c_gen3x16_xdma_3_202210_1
+/tools/Xilinx//Vitis/2022.1/bin/v++ -t hw --platform /opt/xilinx/platforms/xilinx_u55c_gen3x16_xdma_3_202210_1/xilinx_u55c_gen3x16_xdma_3_202210_1.xpfm --save-temps  --advanced.param compiler.userPostSysLinkTcl=/pub/scratch/wenqi/SC_ANN_submission/SC-ANN-FPGA/FPGA-with-network/scripts/post_sys_link.tcl  --dk chipscope:network_krnl_1:m_axis_tcp_open_status --dk chipscope:network_krnl_1:s_axis_tcp_tx_meta --dk chipscope:network_krnl_1:m_axis_tcp_tx_status  --dk chipscope:network_krnl_1:s_axis_tcp_open_connection  --dk chipscope:network_krnl_1:m_axis_tcp_port_status --dk chipscope:network_krnl_1:m_axis_tcp_notification --dk chipscope:network_krnl_1:m_axis_tcp_rx_meta  --dk chipscope:network_krnl_1:s_axis_tcp_read_pkg  --dk chipscope:network_krnl_1:s_axis_tcp_listen_port  --config ./kernel/user_krnl/general_11_K_1_12B_6_PE/config_sp_general_11_K_1_12B_6_PE.txt --config ./scripts/network_krnl_mem.txt --config ./scripts/cmac_krnl_slr.txt --report estimate -c -k general_11_K_1_12B_6_PE -o ./_x.hw.xilinx_u55c_gen3x16_xdma_3_202210_1/general_11_K_1_12B_6_PE.xo --input_files kernel/user_krnl/general_11_K_1_12B_6_PE/src/hls/*.cpp
+WARNING: [v++ 60-1604] The supplied option 'dk' is deprecated. To standardize the command line, the preferred alternative is 'debug.chipscope','debug.list_ports', 'debug.protocol. 
+WARNING: [v++ 60-1603] The supplied option 'profile_kernel' is deprecated. The supplied option is replaced by an alternative feature controlled by option ''profile.*''. New options extend profiling beyond kernel and compute units to include additional interfaces.
+Option Map File Used: '/tools/Xilinx/Vitis/2022.1/data/vitis/vpp/optMap.xml'
+INFO: [v++ 82-4274] Default memory will be used for trace offload
+
+****** v++ v2022.1 (64-bit)
+  **** SW Build 3524075 on 2022-04-13-17:42:45
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+
+WARNING: [v++ 60-1495] Deprecated parameter found: compiler.userPostSysLinkTcl. Please use this replacement parameter instead: compiler.userPostDebugProfileOverlayTcl
+INFO: [v++ 60-1306] Additional information associated with this v++ compile can be found at:
+	Reports: /pub/scratch/wenqi/SC_ANN_submission/SC-ANN-FPGA/FPGA-with-network/_x/reports/general_11_K_1_12B_6_PE
+	Log files: /pub/scratch/wenqi/SC_ANN_submission/SC-ANN-FPGA/FPGA-with-network/_x/logs/general_11_K_1_12B_6_PE
+WARNING: [v++ 60-1216] --report/-r option has been deprecated. Please use --report_level/-R estimate to generate an estimate report file for software emulation
+Running Dispatch Server on port: 38179
+INFO: [v++ 60-1548] Creating build summary session with primary output /pub/scratch/wenqi/SC_ANN_submission/SC-ANN-FPGA/FPGA-with-network/_x.hw.xilinx_u55c_gen3x16_xdma_3_202210_1/general_11_K_1_12B_6_PE.xo.compile_summary, at Thu Mar  9 20:00:46 2023
+INFO: [v++ 60-1316] Initiating connection to rulecheck server, at Thu Mar  9 20:00:47 2023
+INFO: [v++ 60-1315] Creating rulecheck session with output '/pub/scratch/wenqi/SC_ANN_submission/SC-ANN-FPGA/FPGA-with-network/_x/reports/general_11_K_1_12B_6_PE/v++_compile_general_11_K_1_12B_6_PE_guidance.html', at Thu Mar  9 20:00:48 2023
+INFO: [v++ 60-895]   Target platform: /opt/xilinx/platforms/xilinx_u55c_gen3x16_xdma_3_202210_1/xilinx_u55c_gen3x16_xdma_3_202210_1.xpfm
+INFO: [v++ 60-1578]   This platform contains Xilinx Shell Archive '/opt/xilinx/platforms/xilinx_u55c_gen3x16_xdma_3_202210_1/hw/hw.xsa'
+INFO: [v++ 74-78] Compiler Version string: 2022.1
+INFO: [v++ 60-585] Compiling for hardware target
+INFO: [v++ 60-423]   Target device: xilinx_u55c_gen3x16_xdma_3_202210_1
+INFO: [v++ 60-242] Creating kernel: 'general_11_K_1_12B_6_PE'
+INFO: [v++ 60-1616] Creating a HLS clock using kernel_frequency option: 140 MHz
+make: *** [config_hls.mk:8: _x.hw.xilinx_u55c_gen3x16_xdma_3_202210_1/general_11_K_1_12B_6_PE.xo] Interrupt

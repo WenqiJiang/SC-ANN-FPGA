@@ -142,7 +142,7 @@ void type_conversion_and_split(
             for (int entry_id = 0; entry_id < scanned_entries_every_cell; entry_id++) {
 #pragma HLS pipeline II=1
                 ap_uint512_t in = s_raw_input.read();
-                three_PQ_codes out = ap_ap_ap_uint512_to_three_PQ_codes(in);
+                three_PQ_codes out = ap_uint512_to_three_PQ_codes(in);
                 s_single_PQ_0.write(out.PQ_0);
                 s_single_PQ_1.write(out.PQ_1);
                 s_single_PQ_2.write(out.PQ_2);

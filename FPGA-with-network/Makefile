@@ -89,7 +89,7 @@ endif
 
 # Kernel compiler global settings
 CLFLAGS += -t $(TARGET) --platform $(DEVICE) --save-temps #--config $(CONFIGLINKTCL)
-CLFLAGS += --kernel_frequency 200
+# CLFLAGS += --kernel_frequency 200
 ifneq ($(TARGET), hw)
   CLFLAGS += -g
 endif
