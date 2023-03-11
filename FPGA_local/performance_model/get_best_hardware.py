@@ -4,6 +4,7 @@ Usage 1: Given a database, an FPGA device, a resource constraint, and a frequenc
     hardware solution
 Example usage:
     python get_best_hardware.py --mode 1 --dbname SIFT100M --FPGA_num 1 --topK 10 --recall_goal 0.8 --nprobe_dict_dir './recall_info/cpu_recall_index_nprobe_pairs_SIFT100M.pkl' --device U280 --max_utilization_rate 60 --freq 140 > out
+    python get_best_hardware.py --mode 1 --dbname SIFT1000M --FPGA_num 8 --topK 10 --recall_goal 0.8 --nprobe_dict_dir './recall_info/cpu_recall_index_nprobe_pairs_SIFT1000M.pkl' --device U55C --max_utilization_rate 60 --freq 140 > out
 
 Usage 2: Same as usage1, but specify a single nlist, also specify with/without OPQ
     python get_best_hardware.py --mode 2 --dbname SIFT100M --FPGA_num 1 --topK 10 --nlist 8192 --OPQ_enable 1 --recall_goal 0.8 --nprobe_dict_dir './recall_info/cpu_recall_index_nprobe_pairs_SIFT100M.pkl' --device U280 --max_utilization_rate 60 --freq 140 > out
@@ -37,7 +38,7 @@ parser.add_argument('--OPQ_enable', type=int, default=0, help="mode 2 / 3 specif
 parser.add_argument('--recall_goal', type=float, default=0.8, help="recall goal, e.g., 0.8 (80%)")
 parser.add_argument('--nprobe_dict_dir', type=str, default='./recall_info/cpu_recall_index_nprobe_pairs_SIFT100M.pkl', help="a dictionary of d[dbname][index_key][topK][recall_goal] -> nprobe")
 # FPGA-related parameters
-parser.add_argument('--device', type=str, default='U280', help="U280/U250/U50")
+parser.add_argument('--device', type=str, default='U55C', help="U280/U250/U50/U55C")
 parser.add_argument('--max_utilization_rate', type=int, default=80, help="in percentage")
 parser.add_argument('--freq', type=int, default=140, help="FPGA frequency in MHz")
 
@@ -100,7 +101,8 @@ recall_goal = args.recall_goal
 MAX_UTIL_PERC = args.max_utilization_rate / 100.0
 FREQ = args.freq * 1e6
 
-if args.device == 'U280':
+if args.device == 'U280' or args.device == 'U55C':
+
     """ Resource related constants """
     TOTAL_BRAM_18K = 4032 
     TOTAL_DSP48E = 9024
@@ -121,65 +123,112 @@ if args.device == 'U280':
         # 100M / 12582912 = 7.94 (without considering padding)
         padding_factor = 1.05
         total_size = 100 * 1e6 * 20 * 64 / 60 * padding_factor
-        per_bank_size = 256 * 1024 * 1024
+        if args.device == 'U280':
+            per_bank_size = 256 * 1024 * 1024
+        elif args.device == 'U55C':
+            per_bank_size = 512 * 1024 * 1024
         MIN_HBM_bank = int(np.ceil(total_size / per_bank_size / args.FPGA_num)) # at least 9 banks to hold PQ16 version
     elif args.dbname == 'SIFT500M':
         # 1 Bank = 256 MB = 4194304 512-bit = 4194304 * 3 = 12582912 vectors
         # 100M / 12582912 = 7.94 (without considering padding)
         padding_factor = 1.05
         total_size = 500 * 1e6 * 20 * 64 / 60 * padding_factor
-        per_bank_size = 256 * 1024 * 1024
+        if args.device == 'U280':
+            per_bank_size = 256 * 1024 * 1024
+        elif args.device == 'U55C':
+            per_bank_size = 512 * 1024 * 1024
         MIN_HBM_bank = int(np.ceil(total_size / per_bank_size / args.FPGA_num))
     elif args.dbname == 'SIFT1000M':
         # 1 Bank = 256 MB = 4194304 512-bit = 4194304 * 3 = 12582912 vectors
         # 100M / 12582912 = 7.94 (without considering padding)
         padding_factor = 1.05
         total_size = 1000 * 1e6 * 20 * 64 / 60 * padding_factor
-        per_bank_size = 256 * 1024 * 1024
+        if args.device == 'U280':
+            per_bank_size = 256 * 1024 * 1024
+        elif args.device == 'U55C':
+            per_bank_size = 512 * 1024 * 1024
         MIN_HBM_bank = int(np.ceil(total_size / per_bank_size / args.FPGA_num))
     else:
         print("Unsupported dataset")
         raise ValueError
     
     #####     Shell     #####
+    """
+    vi build_dir.hw.xilinx_u55c_gen3x16_xdma_3_202210_1/reports/link/imp/impl_1_full_util_routed.rpt 
+    vi build_dir.hw.xilinx_u55c_gen3x16_xdma_3_202210_1/reports/link/imp/impl_1_kernel_util_routed.rpt
++---------------------+-------------------+------------------+-------------------+----------------+---------------+----------------+
+| Name                | LUT               | LUTAsMem         | REG               | BRAM           | URAM          | DSP            |
++---------------------+-------------------+------------------+-------------------+----------------+---------------+----------------+
+| Platform            |  259776 [ 19.93%] |  16427 [  2.73%] |  395072 [ 15.15%] |  371 [ 18.40%] |   0 [  0.00%] |    4 [  0.04%] |
+| User Budget         | 1043904 [100.00%] | 584533 [100.00%] | 2212288 [100.00%] | 1645 [100.00%] | 960 [100.00%] | 9020 [100.00%] |
+|    Used Resources   |   24230 [  2.32%] |    963 [  0.16%] |   98181 [  4.44%] |   26 [  1.58%] |   0 [  0.00%] |    0 [  0.00%] |
+|    Unused Resources | 1019674 [ 97.68%] | 583570 [ 99.84%] | 2114107 [ 95.56%] | 1619 [ 98.42%] | 960 [100.00%] | 9020 [100.00%] |
+| cmac_krnl           |   22818 [  2.19%] |    947 [  0.16%] |   94627 [  4.28%] |   26 [  1.58%] |   0 [  0.00%] |    0 [  0.00%] |
+|    cmac_krnl_1      |   22818 [  2.19%] |    947 [  0.16%] |   94627 [  4.28%] |   26 [  1.58%] |   0 [  0.00%] |    0 [  0.00%] |
+| hls_recv_krnl       |    1412 [  0.14%] |     16 [ <0.01%] |    3554 [  0.16%] |    0 [  0.00%] |   0 [  0.00%] |    0 [  0.00%] |
+|    hls_recv_krnl_1  |    1412 [  0.14%] |     16 [ <0.01%] |    3554 [  0.16%] |    0 [  0.00%] |   0 [  0.00%] |    0 [  0.00%] |
++---------------------+-------------------+------------------+-------------------+----------------+---------------+----------------+
+    """
 
-    resource_hmss = Resource()
-    resource_hmss.LUT = 55643 
-    resource_hmss.FF = 103037
-    resource_hmss.BRAM_18K = 2 * 4
-    resource_hmss.URAM = 0
-    resource_hmss.DSP48E = 0
-    resource_hmss.HBM_bank = 0
+    # platform includes all the shell components including the network stack
+    resource_platform = Resource()
+    resource_platform.LUT = 259776 
+    resource_platform.FF = 395072
+    resource_platform.BRAM_18K = 2 * 371
+    resource_platform.URAM = 0
+    resource_platform.DSP48E = 0
+    resource_platform.HBM_bank = 0
 
-    resource_System_DPA = Resource()
-    resource_System_DPA.LUT = 35738
-    resource_System_DPA.FF = 76789
-    resource_System_DPA.BRAM_18K = 2 * 16
-    resource_System_DPA.URAM = 0
-    resource_System_DPA.DSP48E = 0
-    resource_System_DPA.HBM_bank = 0
+    resourece_cmac = Resource()
+    resourece_cmac.LUT = 22818
+    resourece_cmac.FF = 94627
+    resourece_cmac.BRAM_18K = 2 * 26
+    resourece_cmac.URAM = 0
+    resourece_cmac.DSP48E = 0
+    resourece_cmac.HBM_bank = 0
 
-    resource_xdma = Resource()
-    resource_xdma.LUT = 9100
-    resource_xdma.FF = 15572
-    resource_xdma.BRAM_18K = 2 * 0
-    resource_xdma.URAM = 0
-    resource_xdma.DSP48E = 0
-    resource_xdma.HBM_bank = 0
-
-    resourece_static_region = Resource()
-    resourece_static_region.LUT = 93280
-    resourece_static_region.FF = 128746
-    resourece_static_region.BRAM_18K = 2 * 200
-    resourece_static_region.URAM = 0
-    resourece_static_region.DSP48E = 4
-    resourece_static_region.HBM_bank = 0
-
-    # component_list_shell = [resource_hmss, resource_System_DPA, resource_xdma, resourece_static_region]
-    component_list_shell = [resource_hmss, resource_System_DPA, resource_xdma, resourece_static_region]
+    component_list_shell = [resource_platform, resourece_cmac]
     shell_consumption = sum_resource(component_list_shell)
 
+    # resource_hmss = Resource()
+    # resource_hmss.LUT = 55643 
+    # resource_hmss.FF = 103037
+    # resource_hmss.BRAM_18K = 2 * 4
+    # resource_hmss.URAM = 0
+    # resource_hmss.DSP48E = 0
+    # resource_hmss.HBM_bank = 0
+
+    # resource_System_DPA = Resource()
+    # resource_System_DPA.LUT = 35738
+    # resource_System_DPA.FF = 76789
+    # resource_System_DPA.BRAM_18K = 2 * 16
+    # resource_System_DPA.URAM = 0
+    # resource_System_DPA.DSP48E = 0
+    # resource_System_DPA.HBM_bank = 0
+
+    # resource_xdma = Resource()
+    # resource_xdma.LUT = 9100
+    # resource_xdma.FF = 15572
+    # resource_xdma.BRAM_18K = 2 * 0
+    # resource_xdma.URAM = 0
+    # resource_xdma.DSP48E = 0
+    # resource_xdma.HBM_bank = 0
+
+    # resourece_static_region = Resource()
+    # resourece_static_region.LUT = 93280
+    # resourece_static_region.FF = 128746
+    # resourece_static_region.BRAM_18K = 2 * 200
+    # resourece_static_region.URAM = 0
+    # resourece_static_region.DSP48E = 4
+    # resourece_static_region.HBM_bank = 0
+
+    # # component_list_shell = [resource_hmss, resource_System_DPA, resource_xdma, resourece_static_region]
+    # component_list_shell = [resource_hmss, resource_System_DPA, resource_xdma, resourece_static_region]
+    # shell_consumption = sum_resource(component_list_shell)
+
 elif args.device == 'U50':
+
+    raise("Unsupported device, since the network resource consumption is not yet measured")
     """ Resource related constants """
     TOTAL_BRAM_18K = 2688 
     TOTAL_DSP48E = 5952
@@ -244,6 +293,8 @@ elif args.device == 'U50':
     shell_consumption = sum_resource(component_list_shell)
 
 elif args.device == 'U250':
+    raise("Unsupported device, since the network resource consumption is not yet measured")
+
     """ Resource related constants """
     TOTAL_BRAM_18K = 5376 
     TOTAL_DSP48E = 12288
