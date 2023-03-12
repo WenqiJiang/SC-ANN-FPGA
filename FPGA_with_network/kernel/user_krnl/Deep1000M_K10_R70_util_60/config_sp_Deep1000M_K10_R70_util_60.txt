@@ -1,0 +1,54 @@
+profile_kernel=data:all:all:all
+kernel_frequency=140
+debug=1
+
+[connectivity] 
+
+# slr=cmac_krnl_1:SLR2
+
+sp=Deep1000M_K10_R70_util_60_1.HBM_in0:HBM[5]
+sp=Deep1000M_K10_R70_util_60_1.HBM_in1:HBM[7]
+sp=Deep1000M_K10_R70_util_60_1.HBM_in2:HBM[9]
+sp=Deep1000M_K10_R70_util_60_1.HBM_in3:HBM[11]
+sp=Deep1000M_K10_R70_util_60_1.HBM_in4:HBM[13]
+sp=Deep1000M_K10_R70_util_60_1.HBM_in5:HBM[15]
+sp=Deep1000M_K10_R70_util_60_1.HBM_in6:HBM[17]
+sp=Deep1000M_K10_R70_util_60_1.HBM_in7:HBM[21]
+sp=Deep1000M_K10_R70_util_60_1.HBM_in8:HBM[23]
+sp=Deep1000M_K10_R70_util_60_1.HBM_in9:HBM[25]
+sp=Deep1000M_K10_R70_util_60_1.HBM_in10:HBM[27]
+  
+sp=Deep1000M_K10_R70_util_60_1.HBM_meta_info:HBM[2]
+sp=Deep1000M_K10_R70_util_60_1.HBM_vector_quantizer:HBM[3]
+
+sp=network_krnl_1.m00_axi:HBM[0]
+sp=network_krnl_1.m01_axi:HBM[0]
+sc=network_krnl_1.m_axis_udp_rx:Deep1000M_K10_R70_util_60_1.s_axis_udp_rx
+sc=network_krnl_1.m_axis_udp_rx_meta:Deep1000M_K10_R70_util_60_1.s_axis_udp_rx_meta
+sc=network_krnl_1.m_axis_tcp_port_status:Deep1000M_K10_R70_util_60_1.s_axis_tcp_port_status
+sc=network_krnl_1.m_axis_tcp_open_status:Deep1000M_K10_R70_util_60_1.s_axis_tcp_open_status
+sc=network_krnl_1.m_axis_tcp_notification:Deep1000M_K10_R70_util_60_1.s_axis_tcp_notification
+sc=network_krnl_1.m_axis_tcp_rx_meta:Deep1000M_K10_R70_util_60_1.s_axis_tcp_rx_meta
+sc=network_krnl_1.m_axis_tcp_rx_data:Deep1000M_K10_R70_util_60_1.s_axis_tcp_rx_data
+sc=network_krnl_1.m_axis_tcp_tx_status:Deep1000M_K10_R70_util_60_1.s_axis_tcp_tx_status
+
+sc=Deep1000M_K10_R70_util_60_1.m_axis_udp_tx:network_krnl_1.s_axis_udp_tx
+sc=Deep1000M_K10_R70_util_60_1.m_axis_udp_tx_meta:network_krnl_1.s_axis_udp_tx_meta
+sc=Deep1000M_K10_R70_util_60_1.m_axis_tcp_listen_port:network_krnl_1.s_axis_tcp_listen_port
+sc=Deep1000M_K10_R70_util_60_1.m_axis_tcp_open_connection:network_krnl_1.s_axis_tcp_open_connection
+sc=Deep1000M_K10_R70_util_60_1.m_axis_tcp_close_connection:network_krnl_1.s_axis_tcp_close_connection
+sc=Deep1000M_K10_R70_util_60_1.m_axis_tcp_read_pkg:network_krnl_1.s_axis_tcp_read_pkg
+sc=Deep1000M_K10_R70_util_60_1.m_axis_tcp_tx_meta:network_krnl_1.s_axis_tcp_tx_meta
+sc=Deep1000M_K10_R70_util_60_1.m_axis_tcp_tx_data:network_krnl_1.s_axis_tcp_tx_data
+
+sc=cmac_krnl_1.axis_net_rx:network_krnl_1.axis_net_rx
+sc=network_krnl_1.axis_net_tx:cmac_krnl_1.axis_net_tx
+
+
+[vivado] 
+# param=project.writeIntermediateCheckpoints=true
+
+##### Enable one of the following strategies by uncomment the options #####
+# prop=run.impl_1.strategy=Performance_SpreadSLLs
+prop=run.impl_1.strategy=Performance_BalanceSLLs
+# prop=run.impl_1.strategy=Congestion_SSI_SpreadLogic_high
