@@ -29,7 +29,7 @@ elseif (FDEV_NAME STREQUAL "u50")
 elseif (FDEV_NAME STREQUAL "u55c")
     set(DEVICE_NAME "u55c" CACHE STRING "device name")
     set(FPGA_PART "xcu55c-fsvh2892-2L-e" CACHE STRING "FPGA part" FORCE)
-    set(NETWORK_KRNL_MEM "HBM[15]" CACHE STRING "Network krnl mem bank" FORCE)
+    set(NETWORK_KRNL_MEM "HBM[0]" CACHE STRING "Network krnl mem bank" FORCE)
     set(CMAC_SLR "SLR1" CACHE STRING "Cmac krnl slr" FORCE)
 endif()
 

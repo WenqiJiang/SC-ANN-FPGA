@@ -56,9 +56,9 @@ max_utilization_rate=args.max_utilization_rate, freq=args.freq))
 assert args.dbname != '', "Please fill the DB name, e.g., SITF100M"
 if args.dbname == 'SIFT100M' or args.dbname == 'Deep100M':
     TOTAL_VECTORS = int(1e8 / args.FPGA_num)
-elif args.dbname == 'SIFT500M':
+elif args.dbname == 'SIFT500M' or args.dbname == 'Deep500M':
     TOTAL_VECTORS = int(5e8 / args.FPGA_num)
-elif args.dbname == 'SIFT1000M':
+elif args.dbname == 'SIFT1000M' or args.dbname == 'Deep1000M':
     TOTAL_VECTORS = int(1e9 / args.FPGA_num)
 else:
     print("Unsupported dataset")
@@ -128,7 +128,7 @@ if args.device == 'U280' or args.device == 'U55C':
         elif args.device == 'U55C':
             per_bank_size = 512 * 1024 * 1024
         MIN_HBM_bank = int(np.ceil(total_size / per_bank_size / args.FPGA_num)) # at least 9 banks to hold PQ16 version
-    elif args.dbname == 'SIFT500M':
+    elif args.dbname == 'SIFT500M'  or args.dbname == 'Deep500M':
         # 1 Bank = 256 MB = 4194304 512-bit = 4194304 * 3 = 12582912 vectors
         # 100M / 12582912 = 7.94 (without considering padding)
         padding_factor = 1.05
@@ -138,7 +138,7 @@ if args.device == 'U280' or args.device == 'U55C':
         elif args.device == 'U55C':
             per_bank_size = 512 * 1024 * 1024
         MIN_HBM_bank = int(np.ceil(total_size / per_bank_size / args.FPGA_num))
-    elif args.dbname == 'SIFT1000M':
+    elif args.dbname == 'SIFT1000M' or args.dbname == 'Deep1000M':
         # 1 Bank = 256 MB = 4194304 512-bit = 4194304 * 3 = 12582912 vectors
         # 100M / 12582912 = 7.94 (without considering padding)
         padding_factor = 1.05
@@ -777,9 +777,9 @@ if __name__ == "__main__":
 
     if args.dbname == 'SIFT100M' or args.dbname == 'Deep100M':
         template_fill_dict["DB_SCALE"] = "100M"
-    elif args.dbname == 'SIFT500M':
+    elif args.dbname == 'SIFT500M' or args.dbname == 'Deep500M':
         template_fill_dict["DB_SCALE"] = "500M"
-    elif args.dbname == 'SIFT1000M':
+    elif args.dbname == 'SIFT1000M' or args.dbname == 'Deep1000M':
         template_fill_dict["DB_SCALE"] = "1000M"
     else:
         print("Unknown db name, unable to write DB_SCALE to config")
