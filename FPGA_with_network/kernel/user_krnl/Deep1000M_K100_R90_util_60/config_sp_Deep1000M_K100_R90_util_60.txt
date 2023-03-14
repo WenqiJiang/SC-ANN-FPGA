@@ -45,6 +45,6 @@ sc=network_krnl_1.axis_net_tx:cmac_krnl_1.axis_net_tx
 # param=project.writeIntermediateCheckpoints=true
 
 ##### Enable one of the following strategies by uncomment the options #####
-# prop=run.impl_1.strategy=Performance_SpreadSLLs
-prop=run.impl_1.strategy=Performance_BalanceSLLs
+prop=run.impl_1.strategy=Performance_SpreadSLLs
+# prop=run.impl_1.strategy=Performance_BalanceSLLs
 # prop=run.impl_1.strategy=Congestion_SSI_SpreadLogic_high

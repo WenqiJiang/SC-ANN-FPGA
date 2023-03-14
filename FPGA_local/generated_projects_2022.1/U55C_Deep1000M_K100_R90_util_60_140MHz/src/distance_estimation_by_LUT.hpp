@@ -119,23 +119,49 @@ void PQ_lookup_computation(
                 single_PQ_result out; 
                 out.vec_ID = PQ_local.vec_ID;
                 
-                out.dist = 
-                    distance_LUT[0][PQ_local.PQ_code[0]] + 
-                    distance_LUT[1][PQ_local.PQ_code[1]] + 
-                    distance_LUT[2][PQ_local.PQ_code[2]] + 
-                    distance_LUT[3][PQ_local.PQ_code[3]] + 
-                    distance_LUT[4][PQ_local.PQ_code[4]] + 
-                    distance_LUT[5][PQ_local.PQ_code[5]] + 
-                    distance_LUT[6][PQ_local.PQ_code[6]] + 
-                    distance_LUT[7][PQ_local.PQ_code[7]] + 
-                    distance_LUT[8][PQ_local.PQ_code[8]] + 
-                    distance_LUT[9][PQ_local.PQ_code[9]] + 
-                    distance_LUT[10][PQ_local.PQ_code[10]] + 
-                    distance_LUT[11][PQ_local.PQ_code[11]] + 
-                    distance_LUT[12][PQ_local.PQ_code[12]] + 
-                    distance_LUT[13][PQ_local.PQ_code[13]] + 
-                    distance_LUT[14][PQ_local.PQ_code[14]] + 
-                    distance_LUT[15][PQ_local.PQ_code[15]];
+                // Wenqi: original Latency=63 //
+                // out.dist = 
+                //     distance_LUT[0][PQ_local.PQ_code[0]] + 
+                //     distance_LUT[1][PQ_local.PQ_code[1]] + 
+                //     distance_LUT[2][PQ_local.PQ_code[2]] + 
+                //     distance_LUT[3][PQ_local.PQ_code[3]] + 
+                //     distance_LUT[4][PQ_local.PQ_code[4]] + 
+                //     distance_LUT[5][PQ_local.PQ_code[5]] + 
+                //     distance_LUT[6][PQ_local.PQ_code[6]] + 
+                //     distance_LUT[7][PQ_local.PQ_code[7]] + 
+                //     distance_LUT[8][PQ_local.PQ_code[8]] + 
+                //     distance_LUT[9][PQ_local.PQ_code[9]] + 
+                //     distance_LUT[10][PQ_local.PQ_code[10]] + 
+                //     distance_LUT[11][PQ_local.PQ_code[11]] + 
+                //     distance_LUT[12][PQ_local.PQ_code[12]] + 
+                //     distance_LUT[13][PQ_local.PQ_code[13]] + 
+                //     distance_LUT[14][PQ_local.PQ_code[14]] + 
+                //     distance_LUT[15][PQ_local.PQ_code[15]];
+                // original ends //
+
+                // Wenqi: new //
+                float tmp_dist_L0[8];
+#pragma HLS array_partition variable=tmp_dist_L0 
+                float tmp_dist_L1[4];
+#pragma HLS array_partition variable=tmp_dist_L1 
+                float tmp_dist_L2[2];
+#pragma HLS array_partition variable=tmp_dist_L2 
+
+                for (int i = 0; i < 8; i++) {
+#pragma HLS UNROLL
+                    tmp_dist_L0[i] = distance_LUT[2 * i][PQ_local.PQ_code[2 * i]] + 
+                        distance_LUT[2 * i + 1][PQ_local.PQ_code[2 * i + 1]];
+                }
+                for (int i = 0; i < 4; i++) {
+#pragma HLS UNROLL
+                    tmp_dist_L1[i] = tmp_dist_L0[2 * i] + tmp_dist_L0[2 * i + 1];
+                }
+                for (int i = 0; i < 2; i++) {
+#pragma HLS UNROLL
+                    tmp_dist_L2[i] = tmp_dist_L1[2 * i] + tmp_dist_L1[2 * i + 1];
+                }
+                out.dist = tmp_dist_L2[0] + tmp_dist_L2[1];
+                // new ends //
 
                 // for padded element, replace its distance by large number
                 // judge the last 3 distances
