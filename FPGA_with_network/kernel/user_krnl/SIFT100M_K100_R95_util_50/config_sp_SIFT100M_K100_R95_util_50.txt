@@ -1,0 +1,48 @@
+profile_kernel=data:all:all:all
+kernel_frequency=140
+debug=1
+
+[connectivity] 
+
+# slr=cmac_krnl_1:SLR1
+
+sp=SIFT100M_K100_R95_util_50_1.HBM_in0:HBM[0]
+sp=SIFT100M_K100_R95_util_50_1.HBM_in1:HBM[4]
+sp=SIFT100M_K100_R95_util_50_1.HBM_in2:HBM[8]
+sp=SIFT100M_K100_R95_util_50_1.HBM_in3:HBM[18]
+sp=SIFT100M_K100_R95_util_50_1.HBM_in4:HBM[22]
+  
+sp=SIFT100M_K100_R95_util_50_1.HBM_meta_info:HBM[24]
+sp=SIFT100M_K100_R95_util_50_1.HBM_vector_quantizer:HBM[26]
+
+sp=network_krnl_1.m00_axi:HBM[15]
+sp=network_krnl_1.m01_axi:HBM[15]
+sc=network_krnl_1.m_axis_udp_rx:SIFT100M_K100_R95_util_50_1.s_axis_udp_rx
+sc=network_krnl_1.m_axis_udp_rx_meta:SIFT100M_K100_R95_util_50_1.s_axis_udp_rx_meta
+sc=network_krnl_1.m_axis_tcp_port_status:SIFT100M_K100_R95_util_50_1.s_axis_tcp_port_status
+sc=network_krnl_1.m_axis_tcp_open_status:SIFT100M_K100_R95_util_50_1.s_axis_tcp_open_status
+sc=network_krnl_1.m_axis_tcp_notification:SIFT100M_K100_R95_util_50_1.s_axis_tcp_notification
+sc=network_krnl_1.m_axis_tcp_rx_meta:SIFT100M_K100_R95_util_50_1.s_axis_tcp_rx_meta
+sc=network_krnl_1.m_axis_tcp_rx_data:SIFT100M_K100_R95_util_50_1.s_axis_tcp_rx_data
+sc=network_krnl_1.m_axis_tcp_tx_status:SIFT100M_K100_R95_util_50_1.s_axis_tcp_tx_status
+
+sc=SIFT100M_K100_R95_util_50_1.m_axis_udp_tx:network_krnl_1.s_axis_udp_tx
+sc=SIFT100M_K100_R95_util_50_1.m_axis_udp_tx_meta:network_krnl_1.s_axis_udp_tx_meta
+sc=SIFT100M_K100_R95_util_50_1.m_axis_tcp_listen_port:network_krnl_1.s_axis_tcp_listen_port
+sc=SIFT100M_K100_R95_util_50_1.m_axis_tcp_open_connection:network_krnl_1.s_axis_tcp_open_connection
+sc=SIFT100M_K100_R95_util_50_1.m_axis_tcp_close_connection:network_krnl_1.s_axis_tcp_close_connection
+sc=SIFT100M_K100_R95_util_50_1.m_axis_tcp_read_pkg:network_krnl_1.s_axis_tcp_read_pkg
+sc=SIFT100M_K100_R95_util_50_1.m_axis_tcp_tx_meta:network_krnl_1.s_axis_tcp_tx_meta
+sc=SIFT100M_K100_R95_util_50_1.m_axis_tcp_tx_data:network_krnl_1.s_axis_tcp_tx_data
+
+sc=cmac_krnl_1.axis_net_rx:network_krnl_1.axis_net_rx
+sc=network_krnl_1.axis_net_tx:cmac_krnl_1.axis_net_tx
+
+
+[vivado] 
+# param=project.writeIntermediateCheckpoints=true
+
+##### Enable one of the following strategies by uncomment the options #####
+prop=run.impl_1.strategy=Performance_SpreadSLLs
+# prop=run.impl_1.strategy=Performance_BalanceSLLs
+# prop=run.impl_1.strategy=Congestion_SSI_SpreadLogic_high
