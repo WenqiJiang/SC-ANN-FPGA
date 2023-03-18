@@ -3,7 +3,7 @@ CC = g++
 CLAGS=-Wall
 LINK = -lpthread
 
-all: anns_client anns_client_tolerant anns_client_non_blocking
+all: anns_client anns_client_tolerant anns_client_non_blocking anns_client_non_blocking_multi_FPGA
 
 anns_client: anns_client.cpp
 	${CC} ${CLAGS} anns_client.cpp ${LINK} -o anns_client
@@ -13,6 +13,9 @@ anns_client_tolerant: anns_client_tolerant.cpp
 
 anns_client_non_blocking: anns_client_non_blocking.cpp
 	${CC} ${CLAGS} anns_client_non_blocking.cpp ${LINK} -o anns_client_non_blocking
+
+anns_client_non_blocking_multi_FPGA: anns_client_non_blocking_multi_FPGA.cpp
+	${CC} ${CLAGS} anns_client_non_blocking_multi_FPGA.cpp ${LINK} -o anns_client_non_blocking_multi_FPGA
 
 .PHONY: clean, cleanall
 

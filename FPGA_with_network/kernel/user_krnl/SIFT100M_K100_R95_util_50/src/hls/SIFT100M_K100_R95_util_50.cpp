@@ -379,14 +379,14 @@ void network_query_controller_pull(
         }
 
         // read input & write output
-        if (consume_data && (ele_per_query_counter < 128)) {
+        if (consume_data && (ele_per_query_counter < D)) {
             if (!s_query_vectors_per_session[session_entry].empty()) {
                 s_query_vectors.write(s_query_vectors_per_session[session_entry].read());
                 ele_per_query_counter++;
             }
         }
 
-        if (ele_per_query_counter == 128) {
+        if (ele_per_query_counter == D) {
             ele_per_query_counter = 0;
             consume_data = false;
             session_lock = false;

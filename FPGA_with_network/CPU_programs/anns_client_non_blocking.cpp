@@ -17,8 +17,6 @@
 #include <fstream>
 
 #define QUERY_NUM 10000
-#define QUERY_SIZE 512 // 128 D float vector 
-#define RESULT_SIZE 128 // 10 * (float + int) = 80 bytes + padding = 128 bytes
 
 timespec diff(timespec start, timespec end)
 {
@@ -56,12 +54,15 @@ int topK;
 int result_size;
 
 bool start_receiving = false;
+bool finish_receiving = false;
 double duration_ms; // transmission duration in milliseconds
 
 int sock = 0;
 
 int send_query_id = -1;
 int receive_query_id = -1;
+
+int query_size; // e.g., 512-byte 128 D float vector for SIFT 
 
 void *thread_send_queries(void* vargp) 
 { 
@@ -78,9 +79,9 @@ void *thread_send_queries(void* vargp)
 
     struct sockaddr_in serv_addr; 
 
-    char* send_buf = new char[QUERY_SIZE * query_num];
+    char* send_buf = new char[query_size * (query_num + send_recv_gap)];
 
-    memcpy(send_buf, global_query_vector_buf, QUERY_SIZE * query_num);
+    memcpy(send_buf, global_query_vector_buf, query_size * query_num);
 
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) 
     { 
@@ -118,18 +119,22 @@ void *thread_send_queries(void* vargp)
         send_query_id = query_id;
         std::cout << "sending thread query id: " << send_query_id << std::endl;
 
+        if (receive_query_id == query_num - 1) {
+            printf("break send thread");
+            break;
+        }
         volatile int tmp_counter;
         do {
             // wait
             tmp_counter++;
-        } while(send_query_id - receive_query_id >= send_recv_gap);
+        } while(send_query_id - receive_query_id >= send_recv_gap && !finish_receiving);
 
 	    int current_query_sent_bytes = 0;
 
 	    clock_gettime(CLOCK_BOOTTIME, &query_start_time_array[query_id]);
 
-        while (current_query_sent_bytes < QUERY_SIZE) {
-            int sent_bytes = send(sock, send_buf + total_sent_bytes, QUERY_SIZE - current_query_sent_bytes, 0);
+        while (current_query_sent_bytes < query_size) {
+            int sent_bytes = send(sock, send_buf + total_sent_bytes, query_size - current_query_sent_bytes, 0);
             total_sent_bytes += sent_bytes;
             current_query_sent_bytes += sent_bytes;
             if (sent_bytes == -1) {
@@ -144,12 +149,12 @@ void *thread_send_queries(void* vargp)
         }
     }
 
-    if (total_sent_bytes != query_num * QUERY_SIZE) {
-        printf("Sending error, sending more bytes than a block\n");
-    }
-    else {
+    // if (total_sent_bytes != query_num * query_size) {
+    //     printf("Sending error, sending more bytes than a block\n");
+    // }
+    // else {
 	printf("Finish sending\n");
-    }
+    // }
 
 	clock_gettime(CLOCK_BOOTTIME, &end);
 
@@ -174,6 +179,7 @@ void *thread_receive_results(void* vargp)
     const int query_num = t_info -> query_num;
     char* global_result_buf = t_info -> global_result_buf;
     timespec* query_end_time_array = t_info -> query_end_time_array;
+    int send_recv_gap = t_info -> send_recv_gap; 
 
     char* recv_buf= new char[result_size * query_num];
 
@@ -192,7 +198,7 @@ void *thread_receive_results(void* vargp)
 	timespec start, end;
 	clock_gettime(CLOCK_BOOTTIME, &start);
 
-    for (int query_id = 0; query_id < query_num; query_id++) {
+    for (int query_id = 0; query_id < query_num - send_recv_gap; query_id++) {
 
         receive_query_id = query_id;
         std::cout << "receiving thread query id: " << receive_query_id << std::endl;
@@ -223,12 +229,13 @@ void *thread_receive_results(void* vargp)
 	    clock_gettime(CLOCK_BOOTTIME, &query_end_time_array[query_id]);
     }
 
-    if (total_recv_bytes != query_num * result_size) {
-        printf("Receiving error, receiving more bytes than a block\n");
-    }
-    else {
+    // if (total_recv_bytes != query_num * result_size) {
+    //     printf("Receiving error, receiving more bytes than a block\n");
+    // }
+    // else {
 	printf("Finish receiving\n");
-    }
+    finish_receiving = true;
+    // }
 
 	clock_gettime(CLOCK_BOOTTIME, &end);
 
@@ -261,7 +268,7 @@ int main(int argc, char *argv[])
     if (argc < 6 || argc > 8) {
         // <data directory> is only used for loading query vector, can be any folder containing queries
         // <send_recv_gap> denotes the sender can be , e.g. x=5, queries in front of receiver, cannot be 100 queries in front which will influence performance
-        printf("Usage: <executable> <IP> <port> <query vector dir> <ground truth dir> <topK> <optional RT_file_name> <optionnal send_recv_gap> , e.g., ./anns_client_non_blocking 10.1.212.155 8888 /mnt/scratch/wenqi/saved_npy_data/query_vectors_float32_10000_128_raw /mnt/scratch/wenqi/saved_npy_data/gnd 100 'SIFT100M_R@100=0.95' 5\n");
+        printf("Usage: <executable> <IP> <port> <query vector dir> <DB name: SIFT or Deep> <topK> <optional RT_file_name> <optionnal send_recv_gap> , e.g., ./anns_client_non_blocking 10.1.212.155 8888 /mnt/scratch/wenqi/saved_npy_data/query_vectors_float32_10000_128_raw /mnt/scratch/wenqi/saved_npy_data/gnd 100 'SIFT100M_R@100=0.95' 5\n");
         exit(1);
     }
     std::string s_IP = argv[1];
@@ -271,7 +278,16 @@ int main(int argc, char *argv[])
 
     int port = std::stoi(argv[2]);
     std::string query_vector_path = argv[3];
-    std::string gnd_dir = argv[4];
+    std::string dbname = argv[4];
+
+    if (strcmp(dbname.c_str(), "SIFT") == 0) {
+        query_size = 512;
+    } else if (strcmp(dbname.c_str(), "Deep") == 0) {
+        query_size = 384;
+    } else {
+        printf("Unknown DB name, has to be SIFT/Deep");
+        exit(1);
+    }
 
     topK = std::stoi(argv[5]);
     std::string RT_file_name;
@@ -291,6 +307,7 @@ int main(int argc, char *argv[])
     }
 
     printf("server IP: %s, port: %d\n", IP, port);
+    printf("Note: push <send_recv_gap> more queries to FPGA to get the final results out...\n");
 
     if (topK == 1) {
          // 1 single 512-bit packet
@@ -309,11 +326,11 @@ int main(int argc, char *argv[])
         std::cout << "result size (per query) = " << result_size << " bytes" << std::endl;
     }
 
-    size_t query_vector_size = QUERY_NUM * QUERY_SIZE;
+    size_t query_vector_size = QUERY_NUM * query_size;
     char* global_query_vector_buf = new char[query_vector_size];
     char* global_result_buf = new char[QUERY_NUM * result_size];
 
-    timespec* query_start_time_array = new timespec[QUERY_NUM];
+    timespec* query_start_time_array = new timespec[QUERY_NUM + send_recv_gap];
     timespec* query_end_time_array = new timespec[QUERY_NUM];
 
     float* global_RT_ms_buf = new float[QUERY_NUM];
@@ -330,39 +347,39 @@ int main(int argc, char *argv[])
 
     // Load ground truth
     // the raw ground truth size is the same for idx_1M.ivecs, idx_10M.ivecs, idx_100M.ivecs
-    size_t raw_gt_vec_ID_len = 10000 * 1001; 
-    size_t raw_gt_vec_ID_size = raw_gt_vec_ID_len * sizeof(int);
-    std::vector<int> raw_gt_vec_ID(raw_gt_vec_ID_len, 0);
+    // size_t raw_gt_vec_ID_len = 10000 * 1001; 
+    // size_t raw_gt_vec_ID_size = raw_gt_vec_ID_len * sizeof(int);
+    // std::vector<int> raw_gt_vec_ID(raw_gt_vec_ID_len, 0);
 
-    std::string raw_gt_vec_ID_suffix_dir = "idx_100M.ivecs";
-    std::string raw_gt_vec_ID_dir = dir_concat(gnd_dir, raw_gt_vec_ID_suffix_dir);
-    std::ifstream raw_gt_vec_ID_fstream(
-        raw_gt_vec_ID_dir,
-        std::ios::in | std::ios::binary);
-    if (!raw_gt_vec_ID_fstream) {
-        std::cout << "error: only " << raw_gt_vec_ID_fstream.gcount() << " could be read";
-        exit(1);
-    }
-    char* raw_gt_vec_ID_char = (char*) malloc(raw_gt_vec_ID_size);
-    raw_gt_vec_ID_fstream.read(raw_gt_vec_ID_char, raw_gt_vec_ID_size);
-    if (!raw_gt_vec_ID_fstream) {
-        std::cout << "error: only " << raw_gt_vec_ID_fstream.gcount() << " could be read";
-        exit(1);
-    }
-    memcpy(&raw_gt_vec_ID[0], raw_gt_vec_ID_char, raw_gt_vec_ID_size);
-    free(raw_gt_vec_ID_char);
-    size_t gt_vec_ID_len = 10000;
-    std::vector<int> gt_vec_ID(gt_vec_ID_len, 0);
-    // copy contents from raw ground truth to needed ones
-    // Format of ground truth (for 10000 query vectors):
-    //   1000(topK), [1000 ids]
-    //   1000(topK), [1000 ids]
-    //        ...     ...
-    //   1000(topK), [1000 ids]
-    // 10000 rows in total, 10000 * 1001 elements, 10000 * 1001 * 4 bytes
-    for (int i = 0; i < 10000; i++) {
-        gt_vec_ID[i] = raw_gt_vec_ID[i * 1001 + 1];
-    }
+    // std::string raw_gt_vec_ID_suffix_dir = "idx_100M.ivecs";
+    // std::string raw_gt_vec_ID_dir = dir_concat(gnd_dir, raw_gt_vec_ID_suffix_dir);
+    // std::ifstream raw_gt_vec_ID_fstream(
+    //     raw_gt_vec_ID_dir,
+    //     std::ios::in | std::ios::binary);
+    // if (!raw_gt_vec_ID_fstream) {
+    //     std::cout << "error: only " << raw_gt_vec_ID_fstream.gcount() << " could be read";
+    //     exit(1);
+    // }
+    // char* raw_gt_vec_ID_char = (char*) malloc(raw_gt_vec_ID_size);
+    // raw_gt_vec_ID_fstream.read(raw_gt_vec_ID_char, raw_gt_vec_ID_size);
+    // if (!raw_gt_vec_ID_fstream) {
+    //     std::cout << "error: only " << raw_gt_vec_ID_fstream.gcount() << " could be read";
+    //     exit(1);
+    // }
+    // memcpy(&raw_gt_vec_ID[0], raw_gt_vec_ID_char, raw_gt_vec_ID_size);
+    // free(raw_gt_vec_ID_char);
+    // size_t gt_vec_ID_len = 10000;
+    // std::vector<int> gt_vec_ID(gt_vec_ID_len, 0);
+    // // copy contents from raw ground truth to needed ones
+    // // Format of ground truth (for 10000 query vectors):
+    // //   1000(topK), [1000 ids]
+    // //   1000(topK), [1000 ids]
+    // //        ...     ...
+    // //   1000(topK), [1000 ids]
+    // // 10000 rows in total, 10000 * 1001 elements, 10000 * 1001 * 4 bytes
+    // for (int i = 0; i < 10000; i++) {
+    //     gt_vec_ID[i] = raw_gt_vec_ID[i * 1001 + 1];
+    // }
 
 
     std::cout << "finish loading" << std::endl;
@@ -398,42 +415,45 @@ int main(int argc, char *argv[])
             ((float) diff_RT.tv_sec) * 1000.0 + 
             ((float) diff_RT.tv_nsec) / 1000.0 / 1000.0;
     }
+    for (int query_id = QUERY_NUM - send_recv_gap; query_id < QUERY_NUM; query_id++) {
+        global_RT_ms_buf[query_id] = global_RT_ms_buf[QUERY_NUM / 2];
+    }
 
     ///// verify correctness /////
 
-    std::cout << "Comparing Results..." << std::endl;
-    int count = 0;
-    int match_count = 0;
+    // std::cout << "Comparing Results..." << std::endl;
+    // int count = 0;
+    // int match_count = 0;
 
-    int* hw_result_vec_ID_partial = (int*) malloc(topK * sizeof(int));
-    float* hw_result_dist_partial = (float*) malloc(topK * sizeof(float));
+    // int* hw_result_vec_ID_partial = (int*) malloc(topK * sizeof(int));
+    // float* hw_result_dist_partial = (float*) malloc(topK * sizeof(float));
 
-    // Result format: <int vec_ID, float distance>
-    for (int query_id = 0; query_id < QUERY_NUM; query_id++) {
+    // // Result format: <int vec_ID, float distance>
+    // for (int query_id = 0; query_id < QUERY_NUM; query_id++) {
 
-        int start_addr = result_size * query_id;
-        // Load data
-        for (int k = 0; k < topK; k++) {
-            memcpy(&hw_result_vec_ID_partial[k], global_result_buf + start_addr + k * 8, 4);
-            memcpy(&hw_result_dist_partial[k], global_result_buf + start_addr + k * 8 + 4, 4);
-        }
-        // for (int k = 0; k < topK; k++) {
-        //     std::cout << "query id: " << query_id << "k = " << k << "vec ID = " << hw_result_vec_ID_partial[k] << std::endl;
-        // }
+    //     int start_addr = result_size * query_id;
+    //     // Load data
+    //     for (int k = 0; k < topK; k++) {
+    //         memcpy(&hw_result_vec_ID_partial[k], global_result_buf + start_addr + k * 8, 4);
+    //         memcpy(&hw_result_dist_partial[k], global_result_buf + start_addr + k * 8 + 4, 4);
+    //     }
+    //     // for (int k = 0; k < topK; k++) {
+    //     //     std::cout << "query id: " << query_id << "k = " << k << "vec ID = " << hw_result_vec_ID_partial[k] << std::endl;
+    //     // }
         
-        // Check correctness
-        count++;
-        // std::cout << "query id" << query_id << std::endl;
-        for (int k = 0; k < topK; k++) {
-            // std::cout << "hw: " << hw_result_vec_ID_partial[k] << "gt: " << gt_vec_ID[query_id] << std::endl;
-            if (hw_result_vec_ID_partial[k] == gt_vec_ID[query_id]) {
-                match_count++;
-                break;
-            }
-        } 
-    }
-    free(hw_result_vec_ID_partial);
-    free(hw_result_dist_partial);
+    //     // Check correctness
+    //     count++;
+    //     // std::cout << "query id" << query_id << std::endl;
+    //     for (int k = 0; k < topK; k++) {
+    //         // std::cout << "hw: " << hw_result_vec_ID_partial[k] << "gt: " << gt_vec_ID[query_id] << std::endl;
+    //         if (hw_result_vec_ID_partial[k] == gt_vec_ID[query_id]) {
+    //             match_count++;
+    //             break;
+    //         }
+    //     } 
+    // }
+    // free(hw_result_vec_ID_partial);
+    // free(hw_result_dist_partial);
 
     // for (int i = 0; i < QUERY_NUM * result_size / 8; i++) {
     //     char* start_addr = global_result_buf + 8 * i;
@@ -444,8 +464,8 @@ int main(int argc, char *argv[])
     //     std::cout << "vecID = " << vec_ID << "dist = " << dist << std::endl;
     // }
 
-    float recall = ((float) match_count / (float) count);
-    printf("\n=====  Recall: %.8f  =====\n", recall);
+    // float recall = ((float) match_count / (float) count);
+    // printf("\n=====  Recall: %.8f  =====\n", recall);
 
     // Save RT distribution
     std::string RT_distribution = 

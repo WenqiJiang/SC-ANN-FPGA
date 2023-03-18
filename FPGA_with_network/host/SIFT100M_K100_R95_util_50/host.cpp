@@ -77,7 +77,7 @@ std::string dir_concat(std::string dir1, std::string dir2) {
 int main(int argc, char **argv) {
 
     // Example Usage:
-    // ./host ./network.xclbin 5120000 8888 10.1.212.153 1 8192 17 1 /mnt/scratch/wenqi/saved_npy_data/FPGA_data_SIFT100M_OPQ16,IVF8192,PQ16_16_banks /mnt/scratch/wenqi/saved_npy_data/gnd
+    // ./host ./network.xclbin 5120000 8888 10.1.212.153 1 
     
     // 11 arguments in total
     // arg 0 -> host exe
@@ -89,14 +89,7 @@ int main(int argc, char **argv) {
     // arg 4 -> FPGA IP
     // arg 5 -> FPGA board num
 
-    // Index settings
-    // arg 6 -> nlist
-    // arg 7 -> nprobe
-    // arg 8 -> OPQ_enable
-    // arg 9 -> FPGA index/data directory
-    // arg 10 -> ground truth directory
-
-    if (argc != 11) {
+    if (argc != 6) {
         std::cout << "Usage: " << argv[0] << 
             " <XCLBIN File> [<#RxByte> <Port> <local_IP> <boardNum>] " <<
             " <data directory> <ground truth dir>" << std::endl;
@@ -138,8 +131,8 @@ int main(int argc, char **argv) {
     int nprobe = NPROBE;
     bool OPQ_enable = true;
 
-    std::string data_dir_prefix = argv[6];
-    std::string gnd_dir = argv[7];
+    std::string data_dir_prefix = "/mnt/scratch/wenqi/saved_npy_data/FPGA_data_SIFT100M_OPQ16,IVF16384,PQ16_5_banks";
+    std::string gnd_dir = "/mnt/scratch/wenqi/saved_npy_data/SIFT_gnd";
 
     std::cout << "nlist: " << nlist << std::endl <<
         "nprobe: " << nprobe << std::endl <<
