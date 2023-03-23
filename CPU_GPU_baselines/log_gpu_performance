@@ -1,0 +1,30 @@
+  IndexIVFPQ size 100000000 -> GpuIndexIVFPQ indicesOptions=0 usePrecomputed=1 useFloat16=0 reserveVecs=0
+preparing resources for 1 GPUs
+cachefiles:
+None
+./trained_GPU_indexes/bench_gpu_SIFT100M_IVF1024,PQ16/cent_SIFT100M_IVF1024.npy
+./trained_GPU_indexes/bench_gpu_SIFT100M_IVF1024,PQ16/SIFT100M_IVF1024,PQ16.index
+load ./trained_GPU_indexes/bench_gpu_SIFT100M_IVF1024,PQ16/SIFT100M_IVF1024,PQ16.index
+CPU index contains 100000000 vectors, move to GPU
+copying loaded index to GPUs
+move to GPU done in 6.348 s
+DB: SIFT100M	index: IVF1024,PQ16	topK: 10	recall goal: 0.4	nprobe: 1	QPS = 764.3104703397016
+  probe=1  : 130.837 s 1-R@1: 0.2415 1-R@10: 0.4869 
+DB: SIFT100M	index: IVF1024,PQ16	topK: 10	recall goal: 0.5	nprobe: 2	QPS = 607.2379160910058
+  probe=2  : 164.680 s 1-R@1: 0.2876 1-R@10: 0.6248 
+DB: SIFT100M	index: IVF1024,PQ16	topK: 10	recall goal: 0.6	nprobe: 2	QPS = 660.5995681831548
+  probe=2  : 151.378 s 1-R@1: 0.2876 1-R@10: 0.6248 
+DB: SIFT100M	index: IVF1024,PQ16	topK: 10	recall goal: 0.7	nprobe: 4	QPS = 630.6903062494657
+  probe=4  : 158.556 s 1-R@1: 0.3164 1-R@10: 0.7179 
+DB: SIFT100M	index: IVF1024,PQ16	topK: 10	recall goal: 0.8	nprobe: 39	QPS = 200.9584977665422
+  probe=39 : 497.615 s 1-R@1: 0.3357 1-R@10: 0.8001 
+DB: SIFT100M	index: IVF1024,PQ16	topK: 1	recall goal: 0.2	nprobe: 1	QPS = 826.9423511302508
+  probe=1  : 120.927 s 1-R@1: 0.2414 
+DB: SIFT100M	index: IVF1024,PQ16	topK: 1	recall goal: 0.25	nprobe: 2	QPS = 781.9309999076441
+  probe=2  : 127.889 s 1-R@1: 0.2875 
+DB: SIFT100M	index: IVF1024,PQ16	topK: 1	recall goal: 0.3	nprobe: 3	QPS = 713.1149890881082
+  probe=3  : 140.230 s 1-R@1: 0.3069 
+DB: SIFT100M	index: IVF1024,PQ16	topK: 100	recall goal: 0.6	nprobe: 2	QPS = 661.852510454847
+  probe=2  : 151.091 s 1-R@1: 0.2874 1-R@10: 0.6248 1-R@100: 0.7194 
+DB: SIFT100M	index: IVF1024,PQ16	topK: 100	recall goal: 0.8	nprobe: 3	QPS = 479.3044176551156
+  probe=3  : 208.636 s 1-R@1: 0.3070 1-R@10: 0.6871 1-R@100: 0.8034 

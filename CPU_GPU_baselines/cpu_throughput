@@ -1,0 +1,194 @@
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_IVF1024,PQ16/SIFT100M_IVF1024,PQ16_populated.index
+DB: SIFT100M	index: IVF1024,PQ16	topK: 10	recall goal: 0.4	nprobe: 1	QPS = 724.7204585679318
+DB: SIFT100M	index: IVF1024,PQ16	topK: 10	recall goal: 0.5	nprobe: 2	QPS = 377.5269848548034
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_IVF1024,PQ16/SIFT100M_IVF1024,PQ16_populated.index
+SKIP TEST.	DB: SIFT100M	index: IVF1024,PQ16	topK: 10	recall goal: 0.4	
+SKIP TEST.	DB: SIFT100M	index: IVF1024,PQ16	topK: 10	recall goal: 0.5	
+SKIP TEST.	DB: SIFT100M	index: IVF1024,PQ16	topK: 10	recall goal: 0.6	
+SKIP TEST.	DB: SIFT100M	index: IVF1024,PQ16	topK: 10	recall goal: 0.7	
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_IVF2048,PQ16/SIFT100M_IVF2048,PQ16_populated.index
+SKIP TEST.	DB: SIFT100M	index: IVF2048,PQ16	topK: 10	recall goal: 0.4	
+SKIP TEST.	DB: SIFT100M	index: IVF2048,PQ16	topK: 10	recall goal: 0.5	
+SKIP TEST.	DB: SIFT100M	index: IVF2048,PQ16	topK: 10	recall goal: 0.6	
+SKIP TEST.	DB: SIFT100M	index: IVF2048,PQ16	topK: 10	recall goal: 0.7	
+DB: SIFT100M	index: IVF2048,PQ16	topK: 10	recall goal: 0.8	nprobe: 28	QPS = 56.4447167099793
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_IVF4096,PQ16/SIFT100M_IVF4096,PQ16_populated.index
+DB: SIFT100M	index: IVF4096,PQ16	topK: 10	recall goal: 0.4	nprobe: 1	QPS = 1987.1973877402504
+DB: SIFT100M	index: IVF4096,PQ16	topK: 10	recall goal: 0.5	nprobe: 2	QPS = 1235.7969884154345
+DB: SIFT100M	index: IVF4096,PQ16	topK: 10	recall goal: 0.6	nprobe: 3	QPS = 892.839463283574
+DB: SIFT100M	index: IVF4096,PQ16	topK: 10	recall goal: 0.7	nprobe: 6	QPS = 473.23823040053406
+DB: SIFT100M	index: IVF4096,PQ16	topK: 10	recall goal: 0.8	nprobe: 29	QPS = 107.17125566793348
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_IVF8192,PQ16/SIFT100M_IVF8192,PQ16_populated.index
+DB: SIFT100M	index: IVF8192,PQ16	topK: 10	recall goal: 0.4	nprobe: 2	QPS = 1820.7825220325199
+DB: SIFT100M	index: IVF8192,PQ16	topK: 10	recall goal: 0.5	nprobe: 2	QPS = 1790.589320749855
+DB: SIFT100M	index: IVF8192,PQ16	topK: 10	recall goal: 0.6	nprobe: 4	QPS = 1127.693995822296
+DB: SIFT100M	index: IVF8192,PQ16	topK: 10	recall goal: 0.7	nprobe: 7	QPS = 723.2164626208335
+DB: SIFT100M	index: IVF8192,PQ16	topK: 10	recall goal: 0.8	nprobe: 22	QPS = 263.57686478914377
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_IVF16384,PQ16/SIFT100M_IVF16384,PQ16_populated.index
+DB: SIFT100M	index: IVF16384,PQ16	topK: 10	recall goal: 0.4	nprobe: 2	QPS = 1822.5075007868065
+DB: SIFT100M	index: IVF16384,PQ16	topK: 10	recall goal: 0.5	nprobe: 3	QPS = 1573.3978932401237
+DB: SIFT100M	index: IVF16384,PQ16	topK: 10	recall goal: 0.6	nprobe: 4	QPS = 1389.522375867316
+DB: SIFT100M	index: IVF16384,PQ16	topK: 10	recall goal: 0.7	nprobe: 8	QPS = 940.927411702135
+DB: SIFT100M	index: IVF16384,PQ16	topK: 10	recall goal: 0.8	nprobe: 29	QPS = 353.68073715619994
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_IVF32768,PQ16/SIFT100M_IVF32768,PQ16_populated.index
+DB: SIFT100M	index: IVF32768,PQ16	topK: 10	recall goal: 0.4	nprobe: 2	QPS = 1115.95543632318
+DB: SIFT100M	index: IVF32768,PQ16	topK: 10	recall goal: 0.5	nprobe: 3	QPS = 1060.7183881223123
+DB: SIFT100M	index: IVF32768,PQ16	topK: 10	recall goal: 0.6	nprobe: 5	QPS = 963.7409223862444
+DB: SIFT100M	index: IVF32768,PQ16	topK: 10	recall goal: 0.7	nprobe: 9	QPS = 815.1912651104108
+DB: SIFT100M	index: IVF32768,PQ16	topK: 10	recall goal: 0.8	nprobe: 29	QPS = 460.3828494155466
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_IVF65536,PQ16/SIFT100M_IVF65536,PQ16_populated.index
+DB: SIFT100M	index: IVF65536,PQ16	topK: 10	recall goal: 0.4	nprobe: 2	QPS = 380.8877583156283
+DB: SIFT100M	index: IVF65536,PQ16	topK: 10	recall goal: 0.5	nprobe: 4	QPS = 377.202134456807
+DB: SIFT100M	index: IVF65536,PQ16	topK: 10	recall goal: 0.6	nprobe: 6	QPS = 370.5464717291767
+DB: SIFT100M	index: IVF65536,PQ16	topK: 10	recall goal: 0.7	nprobe: 12	QPS = 348.3579654701615
+DB: SIFT100M	index: IVF65536,PQ16	topK: 10	recall goal: 0.8	nprobe: 33	QPS = 299.23232851541894
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_IVF131072,PQ16/SIFT100M_IVF131072,PQ16_populated.index
+DB: SIFT100M	index: IVF131072,PQ16	topK: 10	recall goal: 0.4	nprobe: 3	QPS = 189.62187188802665
+DB: SIFT100M	index: IVF131072,PQ16	topK: 10	recall goal: 0.5	nprobe: 4	QPS = 189.9502204363345
+DB: SIFT100M	index: IVF131072,PQ16	topK: 10	recall goal: 0.6	nprobe: 7	QPS = 188.59795319053896
+DB: SIFT100M	index: IVF131072,PQ16	topK: 10	recall goal: 0.7	nprobe: 14	QPS = 185.13163335194992
+DB: SIFT100M	index: IVF131072,PQ16	topK: 10	recall goal: 0.8	nprobe: 40	QPS = 173.5670694351579
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_IVF262144,PQ16/SIFT100M_IVF262144,PQ16_populated.index
+DB: SIFT100M	index: IVF262144,PQ16	topK: 10	recall goal: 0.4	nprobe: 3	QPS = 95.82838397745007
+DB: SIFT100M	index: IVF262144,PQ16	topK: 10	recall goal: 0.5	nprobe: 5	QPS = 95.61420326970264
+DB: SIFT100M	index: IVF262144,PQ16	topK: 10	recall goal: 0.6	nprobe: 9	QPS = 95.13308359026911
+DB: SIFT100M	index: IVF262144,PQ16	topK: 10	recall goal: 0.7	nprobe: 18	QPS = 93.98871471858261
+DB: SIFT100M	index: IVF262144,PQ16	topK: 10	recall goal: 0.8	nprobe: 45	QPS = 90.7241522333773
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_OPQ16,IVF1024,PQ16/SIFT100M_OPQ16,IVF1024,PQ16_populated.index
+DB: SIFT100M	index: OPQ16,IVF1024,PQ16	topK: 10	recall goal: 0.4	nprobe: 1	QPS = 721.873068733651
+DB: SIFT100M	index: OPQ16,IVF1024,PQ16	topK: 10	recall goal: 0.5	nprobe: 2	QPS = 375.35801628305694
+DB: SIFT100M	index: OPQ16,IVF1024,PQ16	topK: 10	recall goal: 0.6	nprobe: 2	QPS = 377.2748139335246
+DB: SIFT100M	index: OPQ16,IVF1024,PQ16	topK: 10	recall goal: 0.7	nprobe: 4	QPS = 194.03084113647165
+DB: SIFT100M	index: OPQ16,IVF1024,PQ16	topK: 10	recall goal: 0.8	nprobe: 13	QPS = 61.91572304880069
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_OPQ16,IVF2048,PQ16/SIFT100M_OPQ16,IVF2048,PQ16_populated.index
+DB: SIFT100M	index: OPQ16,IVF2048,PQ16	topK: 10	recall goal: 0.4	nprobe: 1	QPS = 1336.0024264173708
+DB: SIFT100M	index: OPQ16,IVF2048,PQ16	topK: 10	recall goal: 0.5	nprobe: 2	QPS = 707.5072054993312
+DB: SIFT100M	index: OPQ16,IVF2048,PQ16	topK: 10	recall goal: 0.6	nprobe: 3	QPS = 483.15770276338804
+DB: SIFT100M	index: OPQ16,IVF2048,PQ16	topK: 10	recall goal: 0.7	nprobe: 4	QPS = 369.2058284836475
+DB: SIFT100M	index: OPQ16,IVF2048,PQ16	topK: 10	recall goal: 0.8	nprobe: 13	QPS = 119.57681337695352
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_OPQ16,IVF4096,PQ16/SIFT100M_OPQ16,IVF4096,PQ16_populated.index
+DB: SIFT100M	index: OPQ16,IVF4096,PQ16	topK: 10	recall goal: 0.4	nprobe: 1	QPS = 2188.1691130752774
+DB: SIFT100M	index: OPQ16,IVF4096,PQ16	topK: 10	recall goal: 0.5	nprobe: 2	QPS = 1277.4494673476638
+DB: SIFT100M	index: OPQ16,IVF4096,PQ16	topK: 10	recall goal: 0.6	nprobe: 3	QPS = 895.121552708637
+DB: SIFT100M	index: OPQ16,IVF4096,PQ16	topK: 10	recall goal: 0.7	nprobe: 5	QPS = 561.1356079904468
+DB: SIFT100M	index: OPQ16,IVF4096,PQ16	topK: 10	recall goal: 0.8	nprobe: 17	QPS = 179.2684392061203
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_OPQ16,IVF8192,PQ16/SIFT100M_OPQ16,IVF8192,PQ16_populated.index
+DB: SIFT100M	index: OPQ16,IVF8192,PQ16	topK: 10	recall goal: 0.4	nprobe: 2	QPS = 1789.549320120812
+DB: SIFT100M	index: OPQ16,IVF8192,PQ16	topK: 10	recall goal: 0.5	nprobe: 2	QPS = 1775.5105418694855
+DB: SIFT100M	index: OPQ16,IVF8192,PQ16	topK: 10	recall goal: 0.6	nprobe: 4	QPS = 1120.054489345179
+DB: SIFT100M	index: OPQ16,IVF8192,PQ16	topK: 10	recall goal: 0.7	nprobe: 6	QPS = 816.1014286460337
+DB: SIFT100M	index: OPQ16,IVF8192,PQ16	topK: 10	recall goal: 0.8	nprobe: 17	QPS = 330.9572342003776
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_OPQ16,IVF16384,PQ16/SIFT100M_OPQ16,IVF16384,PQ16_populated.index
+DB: SIFT100M	index: OPQ16,IVF16384,PQ16	topK: 10	recall goal: 0.4	nprobe: 2	QPS = 1747.259450972054
+DB: SIFT100M	index: OPQ16,IVF16384,PQ16	topK: 10	recall goal: 0.5	nprobe: 3	QPS = 1518.6285540492468
+DB: SIFT100M	index: OPQ16,IVF16384,PQ16	topK: 10	recall goal: 0.6	nprobe: 4	QPS = 1337.075896892461
+DB: SIFT100M	index: OPQ16,IVF16384,PQ16	topK: 10	recall goal: 0.7	nprobe: 8	QPS = 922.1970347731691
+DB: SIFT100M	index: OPQ16,IVF16384,PQ16	topK: 10	recall goal: 0.8	nprobe: 21	QPS = 457.5735479256642
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_OPQ16,IVF32768,PQ16/SIFT100M_OPQ16,IVF32768,PQ16_populated.index
+DB: SIFT100M	index: OPQ16,IVF32768,PQ16	topK: 10	recall goal: 0.4	nprobe: 2	QPS = 1088.8403073899979
+DB: SIFT100M	index: OPQ16,IVF32768,PQ16	topK: 10	recall goal: 0.5	nprobe: 3	QPS = 1038.5054568094997
+DB: SIFT100M	index: OPQ16,IVF32768,PQ16	topK: 10	recall goal: 0.6	nprobe: 5	QPS = 937.7391477919352
+DB: SIFT100M	index: OPQ16,IVF32768,PQ16	topK: 10	recall goal: 0.7	nprobe: 9	QPS = 802.6244107314319
+DB: SIFT100M	index: OPQ16,IVF32768,PQ16	topK: 10	recall goal: 0.8	nprobe: 24	QPS = 513.6641917211466
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_OPQ16,IVF65536,PQ16/SIFT100M_OPQ16,IVF65536,PQ16_populated.index
+DB: SIFT100M	index: OPQ16,IVF65536,PQ16	topK: 10	recall goal: 0.4	nprobe: 2	QPS = 382.23259766850094
+DB: SIFT100M	index: OPQ16,IVF65536,PQ16	topK: 10	recall goal: 0.5	nprobe: 4	QPS = 369.3782833006759
+DB: SIFT100M	index: OPQ16,IVF65536,PQ16	topK: 10	recall goal: 0.6	nprobe: 6	QPS = 358.81158342913994
+DB: SIFT100M	index: OPQ16,IVF65536,PQ16	topK: 10	recall goal: 0.7	nprobe: 11	QPS = 334.04707823731434
+DB: SIFT100M	index: OPQ16,IVF65536,PQ16	topK: 10	recall goal: 0.8	nprobe: 30	QPS = 265.53223782276
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_OPQ16,IVF131072,PQ16/SIFT100M_OPQ16,IVF131072,PQ16_populated.index
+DB: SIFT100M	index: OPQ16,IVF131072,PQ16	topK: 10	recall goal: 0.4	nprobe: 3	QPS = 189.99718567248547
+DB: SIFT100M	index: OPQ16,IVF131072,PQ16	topK: 10	recall goal: 0.5	nprobe: 4	QPS = 189.4805528166542
+DB: SIFT100M	index: OPQ16,IVF131072,PQ16	topK: 10	recall goal: 0.6	nprobe: 7	QPS = 187.8751715961213
+DB: SIFT100M	index: OPQ16,IVF131072,PQ16	topK: 10	recall goal: 0.7	nprobe: 14	QPS = 184.9771968842607
+DB: SIFT100M	index: OPQ16,IVF131072,PQ16	topK: 10	recall goal: 0.8	nprobe: 37	QPS = 175.16822124155823
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_OPQ16,IVF262144,PQ16/SIFT100M_OPQ16,IVF262144,PQ16_populated.index
+DB: SIFT100M	index: OPQ16,IVF262144,PQ16	topK: 10	recall goal: 0.4	nprobe: 3	QPS = 95.71437694246852
+DB: SIFT100M	index: OPQ16,IVF262144,PQ16	topK: 10	recall goal: 0.5	nprobe: 5	QPS = 95.5331969513954
+DB: SIFT100M	index: OPQ16,IVF262144,PQ16	topK: 10	recall goal: 0.6	nprobe: 9	QPS = 95.0119373937192
+DB: SIFT100M	index: OPQ16,IVF262144,PQ16	topK: 10	recall goal: 0.7	nprobe: 17	QPS = 93.94293203578147
+DB: SIFT100M	index: OPQ16,IVF262144,PQ16	topK: 10	recall goal: 0.8	nprobe: 42	QPS = 90.92681714094279
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_IMI2x8,PQ16/SIFT100M_IMI2x8,PQ16_populated.index
+DB: SIFT100M	index: IMI2x8,PQ16	topK: 10	recall goal: 0.4	nprobe: 2	QPS = 1952.3453723272635
+DB: SIFT100M	index: IMI2x8,PQ16	topK: 10	recall goal: 0.5	nprobe: 4	QPS = 1217.5061678589418
+DB: SIFT100M	index: IMI2x8,PQ16	topK: 10	recall goal: 0.6	nprobe: 7	QPS = 839.5251162244684
+DB: SIFT100M	index: IMI2x8,PQ16	topK: 10	recall goal: 0.7	nprobe: 15	QPS = 495.93297628825894
+DB: SIFT100M	index: IMI2x8,PQ16	topK: 10	recall goal: 0.8	nprobe: 96	QPS = 134.06687252292528
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_IMI2x9,PQ16/SIFT100M_IMI2x9,PQ16_populated.index
+DB: SIFT100M	index: IMI2x9,PQ16	topK: 10	recall goal: 0.4	nprobe: 3	QPS = 3300.3542154916872
+DB: SIFT100M	index: IMI2x9,PQ16	topK: 10	recall goal: 0.5	nprobe: 5	QPS = 2411.0320923971135
+DB: SIFT100M	index: IMI2x9,PQ16	topK: 10	recall goal: 0.6	nprobe: 10	QPS = 1550.606879589167
+DB: SIFT100M	index: IMI2x9,PQ16	topK: 10	recall goal: 0.7	nprobe: 23	QPS = 899.4031710948913
+DB: SIFT100M	index: IMI2x9,PQ16	topK: 10	recall goal: 0.8	nprobe: 114	QPS = 297.97786656647264
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_IMI2x10,PQ16/SIFT100M_IMI2x10,PQ16_populated.index
+DB: SIFT100M	index: IMI2x10,PQ16	topK: 10	recall goal: 0.4	nprobe: 4	QPS = 4363.386537337801
+DB: SIFT100M	index: IMI2x10,PQ16	topK: 10	recall goal: 0.5	nprobe: 8	QPS = 3211.812733187008
+DB: SIFT100M	index: IMI2x10,PQ16	topK: 10	recall goal: 0.6	nprobe: 15	QPS = 2322.263773987581
+DB: SIFT100M	index: IMI2x10,PQ16	topK: 10	recall goal: 0.7	nprobe: 37	QPS = 1363.767176360195
+DB: SIFT100M	index: IMI2x10,PQ16	topK: 10	recall goal: 0.8	nprobe: 151	QPS = 540.8640568123486
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_IMI2x11,PQ16/SIFT100M_IMI2x11,PQ16_populated.index
+DB: SIFT100M	index: IMI2x11,PQ16	topK: 10	recall goal: 0.4	nprobe: 6	QPS = 4137.534135388574
+DB: SIFT100M	index: IMI2x11,PQ16	topK: 10	recall goal: 0.5	nprobe: 12	QPS = 3434.803932688291
+DB: SIFT100M	index: IMI2x11,PQ16	topK: 10	recall goal: 0.6	nprobe: 24	QPS = 2655.2849254814173
+DB: SIFT100M	index: IMI2x11,PQ16	topK: 10	recall goal: 0.7	nprobe: 60	QPS = 1712.722453515553
+DB: SIFT100M	index: IMI2x11,PQ16	topK: 10	recall goal: 0.8	nprobe: 258	QPS = 695.5836805209076
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_IMI2x12,PQ16/SIFT100M_IMI2x12,PQ16_populated.index
+DB: SIFT100M	index: IMI2x12,PQ16	topK: 10	recall goal: 0.4	nprobe: 10	QPS = 2718.4405863187835
+DB: SIFT100M	index: IMI2x12,PQ16	topK: 10	recall goal: 0.5	nprobe: 20	QPS = 2422.5581225969304
+DB: SIFT100M	index: IMI2x12,PQ16	topK: 10	recall goal: 0.6	nprobe: 43	QPS = 1998.5857480763696
+DB: SIFT100M	index: IMI2x12,PQ16	topK: 10	recall goal: 0.7	nprobe: 103	QPS = 1439.4958107496047
+DB: SIFT100M	index: IMI2x12,PQ16	topK: 10	recall goal: 0.8	nprobe: 353	QPS = 745.4006479788329
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_IMI2x13,PQ16/SIFT100M_IMI2x13,PQ16_populated.index
+DB: SIFT100M	index: IMI2x13,PQ16	topK: 10	recall goal: 0.4	nprobe: 17	QPS = 1544.4376785580607
+DB: SIFT100M	index: IMI2x13,PQ16	topK: 10	recall goal: 0.5	nprobe: 37	QPS = 1409.293898498747
+DB: SIFT100M	index: IMI2x13,PQ16	topK: 10	recall goal: 0.6	nprobe: 79	QPS = 1227.0886547083246
+DB: SIFT100M	index: IMI2x13,PQ16	topK: 10	recall goal: 0.7	nprobe: 197	QPS = 938.8765595967574
+DB: SIFT100M	index: IMI2x13,PQ16	topK: 10	recall goal: 0.8	nprobe: 677	QPS = 513.1467125217417
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_IMI2x14,PQ16/SIFT100M_IMI2x14,PQ16_populated.index
+DB: SIFT100M	index: IMI2x14,PQ16	topK: 10	recall goal: 0.4	nprobe: 33	QPS = 807.0666203294429
+DB: SIFT100M	index: IMI2x14,PQ16	topK: 10	recall goal: 0.5	nprobe: 73	QPS = 750.838527748526
+DB: SIFT100M	index: IMI2x14,PQ16	topK: 10	recall goal: 0.6	nprobe: 158	QPS = 671.827252255748
+DB: SIFT100M	index: IMI2x14,PQ16	topK: 10	recall goal: 0.7	nprobe: 394	QPS = 537.2968293458098
+DB: SIFT100M	index: IMI2x14,PQ16	topK: 10	recall goal: 0.8	nprobe: 1262	QPS = 329.1195173439378
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_OPQ16,IMI2x8,PQ16/SIFT100M_OPQ16,IMI2x8,PQ16_populated.index
+DB: SIFT100M	index: OPQ16,IMI2x8,PQ16	topK: 10	recall goal: 0.4	nprobe: 3	QPS = 1089.932508079832
+DB: SIFT100M	index: OPQ16,IMI2x8,PQ16	topK: 10	recall goal: 0.5	nprobe: 4	QPS = 907.2478942678138
+DB: SIFT100M	index: OPQ16,IMI2x8,PQ16	topK: 10	recall goal: 0.6	nprobe: 9	QPS = 549.0962437954101
+DB: SIFT100M	index: OPQ16,IMI2x8,PQ16	topK: 10	recall goal: 0.7	nprobe: 23	QPS = 302.18178745626966
+DB: SIFT100M	index: OPQ16,IMI2x8,PQ16	topK: 10	recall goal: 0.8	nprobe: 219	QPS = 69.34930274148248
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_OPQ16,IMI2x9,PQ16/SIFT100M_OPQ16,IMI2x9,PQ16_populated.index
+DB: SIFT100M	index: OPQ16,IMI2x9,PQ16	topK: 10	recall goal: 0.4	nprobe: 3	QPS = 2257.528519146561
+DB: SIFT100M	index: OPQ16,IMI2x9,PQ16	topK: 10	recall goal: 0.5	nprobe: 6	QPS = 1480.5750385163412
+DB: SIFT100M	index: OPQ16,IMI2x9,PQ16	topK: 10	recall goal: 0.6	nprobe: 13	QPS = 934.6162749064761
+DB: SIFT100M	index: OPQ16,IMI2x9,PQ16	topK: 10	recall goal: 0.7	nprobe: 33	QPS = 529.6631206602958
+DB: SIFT100M	index: OPQ16,IMI2x9,PQ16	topK: 10	recall goal: 0.8	nprobe: 210	QPS = 164.89298729345907
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_OPQ16,IMI2x10,PQ16/SIFT100M_OPQ16,IMI2x10,PQ16_populated.index
+DB: SIFT100M	index: OPQ16,IMI2x10,PQ16	topK: 10	recall goal: 0.4	nprobe: 4	QPS = 3073.9171456885683
+DB: SIFT100M	index: OPQ16,IMI2x10,PQ16	topK: 10	recall goal: 0.5	nprobe: 9	QPS = 2036.3486652056251
+DB: SIFT100M	index: OPQ16,IMI2x10,PQ16	topK: 10	recall goal: 0.6	nprobe: 20	QPS = 1335.7734750984998
+DB: SIFT100M	index: OPQ16,IMI2x10,PQ16	topK: 10	recall goal: 0.7	nprobe: 53	QPS = 764.4537492617787
+DB: SIFT100M	index: OPQ16,IMI2x10,PQ16	topK: 10	recall goal: 0.8	nprobe: 308	QPS = 257.66660470993685
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_OPQ16,IMI2x11,PQ16/SIFT100M_OPQ16,IMI2x11,PQ16_populated.index
+DB: SIFT100M	index: OPQ16,IMI2x11,PQ16	topK: 10	recall goal: 0.4	nprobe: 6	QPS = 3266.3164002600092
+DB: SIFT100M	index: OPQ16,IMI2x11,PQ16	topK: 10	recall goal: 0.5	nprobe: 14	QPS = 2424.475742230896
+DB: SIFT100M	index: OPQ16,IMI2x11,PQ16	topK: 10	recall goal: 0.6	nprobe: 31	QPS = 1691.0068260280063
+DB: SIFT100M	index: OPQ16,IMI2x11,PQ16	topK: 10	recall goal: 0.7	nprobe: 83	QPS = 948.9391667519798
+DB: SIFT100M	index: OPQ16,IMI2x11,PQ16	topK: 10	recall goal: 0.8	nprobe: 403	QPS = 376.59567709194823
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_OPQ16,IMI2x12,PQ16/SIFT100M_OPQ16,IMI2x12,PQ16_populated.index
+DB: SIFT100M	index: OPQ16,IMI2x12,PQ16	topK: 10	recall goal: 0.4	nprobe: 10	QPS = 2343.9772589211934
+DB: SIFT100M	index: OPQ16,IMI2x12,PQ16	topK: 10	recall goal: 0.5	nprobe: 21	QPS = 2010.9753707892621
+DB: SIFT100M	index: OPQ16,IMI2x12,PQ16	topK: 10	recall goal: 0.6	nprobe: 51	QPS = 1556.3172159065168
+DB: SIFT100M	index: OPQ16,IMI2x12,PQ16	topK: 10	recall goal: 0.7	nprobe: 158	QPS = 944.6878930353868
+DB: SIFT100M	index: OPQ16,IMI2x12,PQ16	topK: 10	recall goal: 0.8	nprobe: 710	QPS = 398.7237202694774
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_OPQ16,IMI2x13,PQ16/SIFT100M_OPQ16,IMI2x13,PQ16_populated.index
+DB: SIFT100M	index: OPQ16,IMI2x13,PQ16	topK: 10	recall goal: 0.4	nprobe: 15	QPS = 1481.0002220280026
+DB: SIFT100M	index: OPQ16,IMI2x13,PQ16	topK: 10	recall goal: 0.5	nprobe: 34	QPS = 1328.6622130037078
+DB: SIFT100M	index: OPQ16,IMI2x13,PQ16	topK: 10	recall goal: 0.6	nprobe: 85	QPS = 1112.0998083105856
+DB: SIFT100M	index: OPQ16,IMI2x13,PQ16	topK: 10	recall goal: 0.7	nprobe: 227	QPS = 800.0652824264187
+DB: SIFT100M	index: OPQ16,IMI2x13,PQ16	topK: 10	recall goal: 0.8	nprobe: 1019	QPS = 373.30668314983103
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_OPQ16,IMI2x14,PQ16/SIFT100M_OPQ16,IMI2x14,PQ16_populated.index
+DB: SIFT100M	index: OPQ16,IMI2x14,PQ16	topK: 10	recall goal: 0.4	nprobe: 24	QPS = 806.9257297940117
+DB: SIFT100M	index: OPQ16,IMI2x14,PQ16	topK: 10	recall goal: 0.5	nprobe: 58	QPS = 745.839423661906
+DB: SIFT100M	index: OPQ16,IMI2x14,PQ16	topK: 10	recall goal: 0.6	nprobe: 146	QPS = 650.4772433910199
+DB: SIFT100M	index: OPQ16,IMI2x14,PQ16	topK: 10	recall goal: 0.7	nprobe: 416	QPS = 496.1071775000073
+DB: SIFT100M	index: OPQ16,IMI2x14,PQ16	topK: 10	recall goal: 0.8	nprobe: 1786	QPS = 259.27223910254344

@@ -1,0 +1,120 @@
+Preparing dataset SIFT100M
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_IVF2048,PQ16/SIFT100M_IVF2048,PQ16_populated.index
+nprobe=28 	 start listening
+Connected by ('10.1.212.74', 45338)
+QPS = 54.34202729492885 (using a single client)
+Preparing dataset SIFT100M
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_IVF4096,PQ16/SIFT100M_IVF4096,PQ16_populated.index
+nprobe=29 	 start listening
+Connected by ('10.1.212.74', 45340)
+QPS = 98.95638543290163 (using a single client)
+Preparing dataset SIFT100M
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_IVF8192,PQ16/SIFT100M_IVF8192,PQ16_populated.index
+nprobe=22 	 start listening
+Connected by ('10.1.212.74', 45342)
+QPS = 221.61582813681707 (using a single client)
+Preparing dataset SIFT100M
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_IVF16384,PQ16/SIFT100M_IVF16384,PQ16_populated.index
+nprobe=29 	 start listening
+Connected by ('10.1.212.74', 45344)
+QPS = 281.35778227249773 (using a single client)
+Preparing dataset SIFT100M
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_IVF32768,PQ16/SIFT100M_IVF32768,PQ16_populated.index
+nprobe=29 	 start listening
+Connected by ('10.1.212.74', 45348)
+QPS = 329.46687129836647 (using a single client)
+Preparing dataset SIFT100M
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_IVF65536,PQ16/SIFT100M_IVF65536,PQ16_populated.index
+nprobe=33 	 start listening
+Connected by ('10.1.212.74', 45350)
+QPS = 221.30964202235273 (using a single client)
+Preparing dataset SIFT100M
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_IVF131072,PQ16/SIFT100M_IVF131072,PQ16_populated.index
+nprobe=40 	 start listening
+Connected by ('10.1.212.74', 45356)
+QPS = 135.2311964566681 (using a single client)
+Preparing dataset SIFT100M
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_IVF262144,PQ16/SIFT100M_IVF262144,PQ16_populated.index
+nprobe=45 	 start listening
+Connected by ('10.1.212.74', 45360)
+QPS = 79.51975716752439 (using a single client)
+Preparing dataset SIFT100M
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_OPQ16,IVF1024,PQ16/SIFT100M_OPQ16,IVF1024,PQ16_populated.index
+nprobe=13 	 start listening
+Connected by ('10.1.212.74', 45362)
+QPS = 58.42318149510291 (using a single client)
+Preparing dataset SIFT100M
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_OPQ16,IVF2048,PQ16/SIFT100M_OPQ16,IVF2048,PQ16_populated.index
+nprobe=13 	 start listening
+Connected by ('10.1.212.74', 45366)
+QPS = 109.20449531025162 (using a single client)
+Preparing dataset SIFT100M
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_OPQ16,IVF4096,PQ16/SIFT100M_OPQ16,IVF4096,PQ16_populated.index
+nprobe=17 	 start listening
+Connected by ('10.1.212.74', 45368)
+QPS = 157.92553034611117 (using a single client)
+Preparing dataset SIFT100M
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_OPQ16,IVF8192,PQ16/SIFT100M_OPQ16,IVF8192,PQ16_populated.index
+nprobe=17 	 start listening
+Connected by ('10.1.212.74', 45372)
+QPS = 270.5106980806877 (using a single client)
+Preparing dataset SIFT100M
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_OPQ16,IVF16384,PQ16/SIFT100M_OPQ16,IVF16384,PQ16_populated.index
+nprobe=21 	 start listening
+Connected by ('10.1.212.74', 45374)
+QPS = 349.1185956228246 (using a single client)
+Preparing dataset SIFT100M
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_OPQ16,IVF32768,PQ16/SIFT100M_OPQ16,IVF32768,PQ16_populated.index
+nprobe=24 	 start listening
+Connected by ('10.1.212.74', 45376)
+QPS = 357.4013420325366 (using a single client)
+Preparing dataset SIFT100M
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_OPQ16,IVF65536,PQ16/SIFT100M_OPQ16,IVF65536,PQ16_populated.index
+nprobe=30 	 start listening
+Connected by ('10.1.212.74', 45378)
+QPS = 223.3858916096663 (using a single client)
+Preparing dataset SIFT100M
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_OPQ16,IVF131072,PQ16/SIFT100M_OPQ16,IVF131072,PQ16_populated.index
+nprobe=37 	 start listening
+Connected by ('10.1.212.74', 45380)
+QPS = 139.77784511703746 (using a single client)
+Preparing dataset SIFT100M
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_OPQ16,IVF262144,PQ16/SIFT100M_OPQ16,IVF262144,PQ16_populated.index
+nprobe=42 	 start listening
+Connected by ('10.1.212.74', 45714)
+QPS = 79.04974975038232 (using a single client)
+Preparing dataset SIFT100M
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_IMI2x8,PQ16/SIFT100M_IMI2x8,PQ16_populated.index
+nprobe=96 	 start listening
+Connected by ('10.1.212.74', 46068)
+QPS = 120.2980585122797 (using a single client)
+Preparing dataset SIFT100M
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_IMI2x9,PQ16/SIFT100M_IMI2x9,PQ16_populated.index
+nprobe=114 	 start listening
+Connected by ('10.1.212.74', 46072)
+QPS = 236.17606655299278 (using a single client)
+Preparing dataset SIFT100M
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_IMI2x10,PQ16/SIFT100M_IMI2x10,PQ16_populated.index
+nprobe=151 	 start listening
+Connected by ('10.1.212.74', 46074)
+QPS = 377.17651789348497 (using a single client)
+Preparing dataset SIFT100M
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_IMI2x11,PQ16/SIFT100M_IMI2x11,PQ16_populated.index
+nprobe=258 	 start listening
+Connected by ('10.1.212.74', 46076)
+QPS = 440.9313873233782 (using a single client)
+Preparing dataset SIFT100M
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_IMI2x12,PQ16/SIFT100M_IMI2x12,PQ16_populated.index
+nprobe=356 	 start listening
+Connected by ('10.1.212.74', 46078)
+QPS = 431.2785090781042 (using a single client)
+Preparing dataset SIFT100M
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_IMI2x13,PQ16/SIFT100M_IMI2x13,PQ16_populated.index
+nprobe=677 	 start listening
+Connected by ('10.1.212.74', 46080)
+QPS = 302.93654531617415 (using a single client)
+Preparing dataset SIFT100M
+loading ./trained_CPU_indexes/bench_cpu_SIFT100M_IMI2x14,PQ16/SIFT100M_IMI2x14,PQ16_populated.index
+nprobe=1262 	 start listening
+Connected by ('10.1.212.74', 46084)
+QPS = 175.85258044412498 (using a single client)

@@ -1,0 +1,136 @@
+query_batch_size:  10000
+Preparing dataset SIFT100M
+(10000, 128)
+sizes: B (100000000, 128) Q (10000, 128) T (100000000, 128) gt (10000, 1000)
+cachefiles:
+None
+/scratch/shigang/Faiss_experiments/micro22/Faiss_experiments/trained_GPU_indexes/bench_gpu_SIFT100M_IVF65536,PQ16/cent_SIFT100M_IVF65536.npy
+/scratch/shigang/Faiss_experiments/micro22/Faiss_experiments/trained_GPU_indexes/bench_gpu_SIFT100M_IVF65536,PQ16/SIFT100M_IVF65536,PQ16.index
+preparing resources for 1 GPUs
+load /scratch/shigang/Faiss_experiments/micro22/Faiss_experiments/trained_GPU_indexes/bench_gpu_SIFT100M_IVF65536,PQ16/SIFT100M_IVF65536,PQ16.index
+CPU index contains 100000000 vectors, move to GPU
+copying loaded index to GPUs
+move to GPU done in 8.134 s
+search...
+10000
+  probe=63 : 0.211 s (QPS=47449.937) 1-R@1: 0.3725 
+  IndexIVFPQ size 100000000 -> GpuIndexIVFPQ indicesOptions=0 usePrecomputed=1 useFloat16=0 reserveVecs=0
+query_batch_size:  10000
+Preparing dataset SIFT100M
+(10000, 128)
+sizes: B (100000000, 128) Q (10000, 128) T (100000000, 128) gt (10000, 1000)
+cachefiles:
+None
+/scratch/shigang/Faiss_experiments/micro22/Faiss_experiments/trained_GPU_indexes/bench_gpu_SIFT100M_IVF65536,PQ16/cent_SIFT100M_IVF65536.npy
+/scratch/shigang/Faiss_experiments/micro22/Faiss_experiments/trained_GPU_indexes/bench_gpu_SIFT100M_IVF65536,PQ16/SIFT100M_IVF65536,PQ16.index
+preparing resources for 1 GPUs
+load /scratch/shigang/Faiss_experiments/micro22/Faiss_experiments/trained_GPU_indexes/bench_gpu_SIFT100M_IVF65536,PQ16/SIFT100M_IVF65536,PQ16.index
+CPU index contains 100000000 vectors, move to GPU
+copying loaded index to GPUs
+move to GPU done in 8.468 s
+search...
+10000
+  probe=63 : 0.304 s (QPS=32873.632) 1-R@1: 0.3724 1-R@10: 0.8305 
+  IndexIVFPQ size 100000000 -> GpuIndexIVFPQ indicesOptions=0 usePrecomputed=1 useFloat16=0 reserveVecs=0
+query_batch_size:  10000
+Preparing dataset SIFT100M
+(10000, 128)
+sizes: B (100000000, 128) Q (10000, 128) T (100000000, 128) gt (10000, 1000)
+cachefiles:
+None
+/scratch/shigang/Faiss_experiments/micro22/Faiss_experiments/trained_GPU_indexes/bench_gpu_SIFT100M_IVF65536,PQ16/cent_SIFT100M_IVF65536.npy
+/scratch/shigang/Faiss_experiments/micro22/Faiss_experiments/trained_GPU_indexes/bench_gpu_SIFT100M_IVF65536,PQ16/SIFT100M_IVF65536,PQ16.index
+preparing resources for 1 GPUs
+load /scratch/shigang/Faiss_experiments/micro22/Faiss_experiments/trained_GPU_indexes/bench_gpu_SIFT100M_IVF65536,PQ16/SIFT100M_IVF65536,PQ16.index
+CPU index contains 100000000 vectors, move to GPU
+copying loaded index to GPUs
+move to GPU done in 8.170 s
+search...
+10000
+  probe=63 : 0.247 s (QPS=40508.003) 1-R@1: 0.3725 1-R@10: 0.8305 1-R@20: 0.8993 
+  IndexIVFPQ size 100000000 -> GpuIndexIVFPQ indicesOptions=0 usePrecomputed=1 useFloat16=0 reserveVecs=0
+query_batch_size:  10000
+Preparing dataset SIFT100M
+(10000, 128)
+sizes: B (100000000, 128) Q (10000, 128) T (100000000, 128) gt (10000, 1000)
+cachefiles:
+None
+/scratch/shigang/Faiss_experiments/micro22/Faiss_experiments/trained_GPU_indexes/bench_gpu_SIFT100M_IVF65536,PQ16/cent_SIFT100M_IVF65536.npy
+/scratch/shigang/Faiss_experiments/micro22/Faiss_experiments/trained_GPU_indexes/bench_gpu_SIFT100M_IVF65536,PQ16/SIFT100M_IVF65536,PQ16.index
+preparing resources for 1 GPUs
+load /scratch/shigang/Faiss_experiments/micro22/Faiss_experiments/trained_GPU_indexes/bench_gpu_SIFT100M_IVF65536,PQ16/SIFT100M_IVF65536,PQ16.index
+CPU index contains 100000000 vectors, move to GPU
+copying loaded index to GPUs
+move to GPU done in 8.721 s
+search...
+10000
+  probe=63 : 0.327 s (QPS=30560.549) 1-R@1: 0.3724 1-R@10: 0.8305 1-R@50: 0.9403 
+  IndexIVFPQ size 100000000 -> GpuIndexIVFPQ indicesOptions=0 usePrecomputed=1 useFloat16=0 reserveVecs=0
+query_batch_size:  10000
+Preparing dataset SIFT100M
+(10000, 128)
+sizes: B (100000000, 128) Q (10000, 128) T (100000000, 128) gt (10000, 1000)
+cachefiles:
+None
+/scratch/shigang/Faiss_experiments/micro22/Faiss_experiments/trained_GPU_indexes/bench_gpu_SIFT100M_IVF65536,PQ16/cent_SIFT100M_IVF65536.npy
+/scratch/shigang/Faiss_experiments/micro22/Faiss_experiments/trained_GPU_indexes/bench_gpu_SIFT100M_IVF65536,PQ16/SIFT100M_IVF65536,PQ16.index
+preparing resources for 1 GPUs
+load /scratch/shigang/Faiss_experiments/micro22/Faiss_experiments/trained_GPU_indexes/bench_gpu_SIFT100M_IVF65536,PQ16/SIFT100M_IVF65536,PQ16.index
+CPU index contains 100000000 vectors, move to GPU
+copying loaded index to GPUs
+move to GPU done in 7.907 s
+search...
+10000
+  probe=63 : 0.236 s (QPS=42398.870) 1-R@1: 0.3724 1-R@10: 0.8305 1-R@100: 0.9504 
+  IndexIVFPQ size 100000000 -> GpuIndexIVFPQ indicesOptions=0 usePrecomputed=1 useFloat16=0 reserveVecs=0
+query_batch_size:  10000
+Preparing dataset SIFT100M
+(10000, 128)
+sizes: B (100000000, 128) Q (10000, 128) T (100000000, 128) gt (10000, 1000)
+cachefiles:
+None
+/scratch/shigang/Faiss_experiments/micro22/Faiss_experiments/trained_GPU_indexes/bench_gpu_SIFT100M_IVF65536,PQ16/cent_SIFT100M_IVF65536.npy
+/scratch/shigang/Faiss_experiments/micro22/Faiss_experiments/trained_GPU_indexes/bench_gpu_SIFT100M_IVF65536,PQ16/SIFT100M_IVF65536,PQ16.index
+preparing resources for 1 GPUs
+load /scratch/shigang/Faiss_experiments/micro22/Faiss_experiments/trained_GPU_indexes/bench_gpu_SIFT100M_IVF65536,PQ16/SIFT100M_IVF65536,PQ16.index
+CPU index contains 100000000 vectors, move to GPU
+copying loaded index to GPUs
+move to GPU done in 8.303 s
+search...
+10000
+  probe=63 : 0.267 s (QPS=37430.094) 1-R@1: 0.3724 1-R@10: 0.8305 1-R@100: 0.9504 1-R@200: 0.9529 
+  IndexIVFPQ size 100000000 -> GpuIndexIVFPQ indicesOptions=0 usePrecomputed=1 useFloat16=0 reserveVecs=0
+query_batch_size:  10000
+Preparing dataset SIFT100M
+(10000, 128)
+sizes: B (100000000, 128) Q (10000, 128) T (100000000, 128) gt (10000, 1000)
+cachefiles:
+None
+/scratch/shigang/Faiss_experiments/micro22/Faiss_experiments/trained_GPU_indexes/bench_gpu_SIFT100M_IVF65536,PQ16/cent_SIFT100M_IVF65536.npy
+/scratch/shigang/Faiss_experiments/micro22/Faiss_experiments/trained_GPU_indexes/bench_gpu_SIFT100M_IVF65536,PQ16/SIFT100M_IVF65536,PQ16.index
+preparing resources for 1 GPUs
+load /scratch/shigang/Faiss_experiments/micro22/Faiss_experiments/trained_GPU_indexes/bench_gpu_SIFT100M_IVF65536,PQ16/SIFT100M_IVF65536,PQ16.index
+CPU index contains 100000000 vectors, move to GPU
+copying loaded index to GPUs
+move to GPU done in 9.961 s
+search...
+10000
+  probe=63 : 0.405 s (QPS=24720.378) 1-R@1: 0.3724 1-R@10: 0.8305 1-R@100: 0.9504 1-R@500: 0.9535 
+  IndexIVFPQ size 100000000 -> GpuIndexIVFPQ indicesOptions=0 usePrecomputed=1 useFloat16=0 reserveVecs=0
+query_batch_size:  10000
+Preparing dataset SIFT100M
+(10000, 128)
+sizes: B (100000000, 128) Q (10000, 128) T (100000000, 128) gt (10000, 1000)
+cachefiles:
+None
+/scratch/shigang/Faiss_experiments/micro22/Faiss_experiments/trained_GPU_indexes/bench_gpu_SIFT100M_IVF65536,PQ16/cent_SIFT100M_IVF65536.npy
+/scratch/shigang/Faiss_experiments/micro22/Faiss_experiments/trained_GPU_indexes/bench_gpu_SIFT100M_IVF65536,PQ16/SIFT100M_IVF65536,PQ16.index
+preparing resources for 1 GPUs
+load /scratch/shigang/Faiss_experiments/micro22/Faiss_experiments/trained_GPU_indexes/bench_gpu_SIFT100M_IVF65536,PQ16/SIFT100M_IVF65536,PQ16.index
+CPU index contains 100000000 vectors, move to GPU
+copying loaded index to GPUs
+move to GPU done in 8.156 s
+search...
+10000
+  probe=63 : 0.538 s (QPS=18578.029) 1-R@1: 0.3724 1-R@10: 0.8305 1-R@100: 0.9504 1-R@1000: 0.9535 
+  IndexIVFPQ size 100000000 -> GpuIndexIVFPQ indicesOptions=0 usePrecomputed=1 useFloat16=0 reserveVecs=0

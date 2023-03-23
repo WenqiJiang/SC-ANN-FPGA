@@ -1,0 +1,26 @@
+Parameters in the experiments:
+bytes_per_vec: 16
+nb (db vector num): 1000000
+nq (num queries): 10000
+d (dimension of vectors): 128
+k (topK): 1
+nbits = 1	m=128	pad_bits=0	QPS: 49.22	recall: 0.1672
+nbits = 2	m=64	pad_bits=0	QPS: 91.75	recall: 0.219
+nbits = 3	m=32	pad_bits=32	QPS: 150.76	recall: 0.2126
+nbits = 4	m=32	pad_bits=0	QPS: 160.90	recall: 0.3275
+nbits = 5	m=16	pad_bits=48	QPS: 274.53	recall: 0.2527
+nbits = 6	m=16	pad_bits=32	QPS: 260.69	recall: 0.3263
+nbits = 7	m=16	pad_bits=16	QPS: 243.01	recall: 0.3949
+nbits = 8	m=16	pad_bits=0	QPS: 1580.59	recall: 0.4542
+nbits = 9	m=8	pad_bits=56	QPS: 432.21	recall: 0.2749
+nbits = 10	m=8	pad_bits=48	QPS: 426.54	recall: 0.3205
+nbits = 11	m=8	pad_bits=40	QPS: 412.52	recall: 0.3711
+nbits = 12	m=8	pad_bits=32	QPS: 393.75	recall: 0.4155
+nbits = 13	m=8	pad_bits=24	QPS: 293.23	recall: 0.4437
+nbits = 14	m=8	pad_bits=16	QPS: 258.84	recall: 0.4676
+Parameters in the experiments:
+bytes_per_vec: 16
+nb (db vector num): 1000000
+nq (num queries): 10000
+d (dimension of vectors): 128
+k (topK): 1

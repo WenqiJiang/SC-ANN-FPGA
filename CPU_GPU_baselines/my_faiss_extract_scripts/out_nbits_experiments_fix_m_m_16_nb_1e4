@@ -1,0 +1,22 @@
+Parameters in the experiments:
+nb (db vector num): 10000
+nq (num queries): 10000
+m (num sub-quantizers): 16
+d (dimension of vectors): 128
+k (topK): 1
+nbits = 1	QPS: 37764.40822941521
+nbits = 2	QPS: 35919.27056794408
+nbits = 3	QPS: 31402.576711368794
+nbits = 4	QPS: 32191.05086109041
+nbits = 5	QPS: 27458.996162958705
+nbits = 6	QPS: 25975.168696307013
+nbits = 7	QPS: 23454.14080411564
+nbits = 8	QPS: 107381.60461651109
+nbits = 9	QPS: 19795.41500812242
+nbits = 10	QPS: 17531.571469832543
+nbits = 11	QPS: 13178.60332011379
+nbits = 12	QPS: 9219.72570556344
+nbits = 13	QPS: 6067.079913736254
+nbits = 14	QPS: 3769.434456856135
+nbits = 15	QPS: 2167.024676871163
+nbits = 16	QPS: 1624.444561752634

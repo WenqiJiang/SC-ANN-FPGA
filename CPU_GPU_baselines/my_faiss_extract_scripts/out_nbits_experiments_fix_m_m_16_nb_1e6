@@ -1,0 +1,22 @@
+Parameters in the experiments:
+nb (db vector num): 1000000
+nq (num queries): 10000
+m (num sub-quantizers): 16
+d (dimension of vectors): 128
+k (topK): 1
+nbits = 1	QPS: 378.5829195316061	recall: 0.0004
+nbits = 2	QPS: 357.22108104008527	recall: 0.0185
+nbits = 3	QPS: 316.61414038331344	recall: 0.079
+nbits = 4	QPS: 323.870668619057	recall: 0.1679
+nbits = 5	QPS: 274.8889909747915	recall: 0.2527
+nbits = 6	QPS: 260.69576496364016	recall: 0.3263
+nbits = 7	QPS: 242.35747524203714	recall: 0.3949
+nbits = 8	QPS: 1587.3749484064842	recall: 0.4542
+nbits = 9	QPS: 223.65208170816513	recall: 0.5196
+nbits = 10	QPS: 220.89979627605106	recall: 0.5687
+nbits = 11	QPS: 199.66680814657698	recall: 0.6172
+nbits = 12	QPS: 168.1469899069608	recall: 0.6601
+nbits = 13	QPS: 138.65834009962776	recall: 0.6957
+nbits = 14	QPS: 115.1630935110715	recall: 0.7296
+nbits = 15	QPS: 52.65465331574345	recall: 0.752
+nbits = 16	QPS: 97.53519429940714	recall: 0.7732
