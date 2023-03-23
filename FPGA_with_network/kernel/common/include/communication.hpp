@@ -300,6 +300,116 @@ void sendData(
      while(sentByteCnt<expectedTxByteCnt);
 }
 
+// Wenqi: multi-con, more protection, e.g., data empty check
+void sendDataProtected(
+     hls::stream<pkt32>& m_axis_tcp_tx_meta, 
+     hls::stream<pkt512>& m_axis_tcp_tx_data, 
+     hls::stream<pkt64>& s_axis_tcp_tx_status,
+     hls::stream<ap_uint<512> >& s_data_in,
+     hls::stream<ap_uint<16> >& s_sessionID_in,
+     int expectedTxByteCnt, 
+     int pkgWordCount
+                )
+{
+// #pragma HLS INTERFACE ap_stable port=pkgWordCount
+// #pragma HLS INTERFACE ap_stable port=expectedTxByteCnt
+
+     bool first_round = true;
+     int sentByteCnt = 0;
+     int currentPkgWordCnt = 0;
+
+     do{
+          pkt32 tx_meta_pkt;
+          appTxRsp resp;
+
+          if ((first_round))
+          {
+               if (!s_sessionID_in.empty() & !s_data_in.empty()) {
+                    ap_uint<16> sessionID = s_sessionID_in.read();
+                    tx_meta_pkt.data(15,0) = sessionID;
+                    tx_meta_pkt.data(31,16) = pkgWordCount*(512/8);
+                    m_axis_tcp_tx_meta.write(tx_meta_pkt);
+
+                    first_round = false;
+               }
+          }
+          else
+          {
+               if (!s_axis_tcp_tx_status.empty())
+               {
+                    pkt64 txStatus_pkt = s_axis_tcp_tx_status.read();
+                    resp.sessionID = txStatus_pkt.data(15,0);
+                    resp.length = txStatus_pkt.data(31,16);
+                    resp.remaining_space = txStatus_pkt.data(61,32);
+                    resp.error = txStatus_pkt.data(63,62);
+
+                    currentPkgWordCnt = (resp.length + 63) >> 6;
+
+                    if (resp.error == 0)
+                    {
+                         sentByteCnt = sentByteCnt + resp.length;
+
+                         for (int j = 0; j < currentPkgWordCnt; ++j)
+                         {
+                         #pragma HLS PIPELINE II=1
+                              ap_uint<512> s_data = s_data_in.read();
+                              pkt512 currWord;
+                              for (int i = 0; i < (512/64); i++) 
+                              {
+                                   #pragma HLS UNROLL
+                                   currWord.data(i*64+63, i*64) = s_data(i*64+63, i*64);
+                                   currWord.keep(i*8+7, i*8) = 0xff;
+                              }
+                              currWord.last = (j == currentPkgWordCnt-1);
+                              m_axis_tcp_tx_data.write(currWord);
+                         }
+
+                         // Wenqi: Before sending the current result out, 
+                         //    there will not be a next sessionID (given the case for only 1 connection)
+                         // thus I move it below the datasend, do not "prefetch"
+                         if (sentByteCnt < expectedTxByteCnt)
+                         {
+                              volatile int counter = 0;
+                              while (s_data_in.empty() || s_sessionID_in.empty()) { counter++; }
+
+                              ap_uint<16> sessionID = s_sessionID_in.read();
+                              tx_meta_pkt.data(15,0) = sessionID;
+                              if (sentByteCnt + pkgWordCount*64 < expectedTxByteCnt )
+                              {
+                                   tx_meta_pkt.data(31,16) = pkgWordCount*(512/8);
+                              //     currentPkgWordCnt = pkgWordCount;
+                              }
+                              else
+                              {
+                                   tx_meta_pkt.data(31,16) = expectedTxByteCnt - sentByteCnt;
+                              //     currentPkgWordCnt = (expectedTxByteCnt - sentByteCnt)>>6;
+                              }
+                              
+                              m_axis_tcp_tx_meta.write(tx_meta_pkt);
+                         }
+                         
+                    }
+                    else
+                    {
+                         //Check if connection  was torn down
+                         if (resp.error == 1)
+                         {
+                              std::cout << "Connection was torn down. " << resp.sessionID << std::endl;
+                         }
+                         else
+                         {
+                              tx_meta_pkt.data(15,0) = resp.sessionID;
+                              tx_meta_pkt.data(31,16) = resp.length;
+                              m_axis_tcp_tx_meta.write(tx_meta_pkt);
+                         }
+                    }
+               }
+          }
+          
+     }
+     while(sentByteCnt<expectedTxByteCnt);
+}
+
 void listenPorts (int basePort, int useConn, hls::stream<pkt16>& m_axis_tcp_listen_port, 
                hls::stream<pkt8>& s_axis_tcp_port_status)
 {

@@ -150,6 +150,8 @@ void network_output_converter_K_10(
     int processed_query_num = 0;
     int out_per_query_counter = 0;
 
+    ap_uint512_t network_buffer[pkg_num_per_query];
+
     do {
 
         if ((!s_tuple_results.empty()) && (out_per_query_counter < 10)) {
@@ -175,7 +177,7 @@ void network_output_converter_K_10(
                     pkg_out.range(i * 64 + 31, i * 64) = tmp_vec_ID;
                     pkg_out.range(i * 64 + 63, i * 64 + 32) = tmp_dist;
                 }
-                s_network_results.write(pkg_out);
+                network_buffer[p] = pkg_out;
             }
             // last packet (some bits are left default)
             ap_uint<512> pkg_out = pkg_out_mask;
@@ -189,9 +191,11 @@ void network_output_converter_K_10(
                 pkg_out.range(i * 64 + 31, i * 64) = tmp_vec_ID;
                 pkg_out.range(i * 64 + 63, i * 64 + 32) = tmp_dist;
             }
-            s_network_results.write(pkg_out);
+            network_buffer[pkg_num_per_query - 1] = pkg_out;
 
-
+            for (int net = 0; net < pkg_num_per_query; net++) {
+                s_network_results.write(network_buffer[net]);
+            }
 
             out_per_query_counter = 0;
             processed_query_num++;
@@ -231,6 +235,8 @@ void network_output_converter_K_100(
     int processed_query_num = 0;
     int out_per_query_counter = 0;
 
+    ap_uint512_t network_buffer[pkg_num_per_query];
+
     do {
 
         if ((!s_tuple_results.empty()) && (out_per_query_counter < 100)) {
@@ -256,7 +262,7 @@ void network_output_converter_K_100(
                     pkg_out.range(i * 64 + 31, i * 64) = tmp_vec_ID;
                     pkg_out.range(i * 64 + 63, i * 64 + 32) = tmp_dist;
                 }
-                s_network_results.write(pkg_out);
+                network_buffer[p] = pkg_out;
             }
             // last packet (some bits are left default)
             ap_uint<512> pkg_out = pkg_out_mask;
@@ -270,9 +276,11 @@ void network_output_converter_K_100(
                 pkg_out.range(i * 64 + 31, i * 64) = tmp_vec_ID;
                 pkg_out.range(i * 64 + 63, i * 64 + 32) = tmp_dist;
             }
-            s_network_results.write(pkg_out);
-
-
+            network_buffer[pkg_num_per_query - 1] = pkg_out;
+            
+            for (int net = 0; net < pkg_num_per_query; net++) {
+                s_network_results.write(network_buffer[net]);
+            }
 
             out_per_query_counter = 0;
             processed_query_num++;
@@ -335,10 +343,10 @@ void network_query_controller_push(
         // should add counter first, send enable signal out, then write 
         //     to prevent deadlock in the case that the puller doesnt know it should pull without the signal
         remaining_floats_in_FIFO[session_entry] += float_len;
-        if (remaining_floats_in_FIFO[session_entry] >= 128) {
+        if (remaining_floats_in_FIFO[session_entry] >= D) {
             s_session_entry.write(session_entry);
             s_sessionID_out.write(session_ID);
-            remaining_floats_in_FIFO[session_entry] -= 128;
+            remaining_floats_in_FIFO[session_entry] -= D;
         }
 
         // write data to the respective FIFO
@@ -548,7 +556,7 @@ extern "C" {
 
         network_query_controller_push(
             // input
-            QUERY_NUM * 512,
+            expectedRxByteCnt,
             s_data_in,
             s_sessionID_in,
             s_nextRxPacketLength_in,
@@ -843,7 +851,7 @@ extern "C" {
         }
         int expectedTxByteCnt = QUERY_NUM * 64 * pkgWordCountOut;
 
-        sendData(
+        sendDataProtected(
             m_axis_tcp_tx_meta, 
             m_axis_tcp_tx_data, 
             s_axis_tcp_tx_status,

@@ -202,6 +202,7 @@ void *thread_receive_results(void* vargp)
 
         receive_query_id = query_id;
         std::cout << "receiving thread query id: " << receive_query_id << std::endl;
+        std::cout << "total recv bytes: " << total_recv_bytes << std::endl;
         
         volatile int tmp_counter;
         do {
@@ -284,6 +285,7 @@ int main(int argc, char *argv[])
         query_size = 512;
     } else if (strcmp(dbname.c_str(), "Deep") == 0) {
         query_size = 384;
+        std::cout << "query size: " << query_size << " bytes" << std::endl;
     } else {
         printf("Unknown DB name, has to be SIFT/Deep");
         exit(1);
